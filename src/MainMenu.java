@@ -51,7 +51,7 @@ class Menu
     private char option;
     private Scanner scan = new Scanner(System.in);
 
-    private void displayMenu()
+    public void displayMenu()
     {
         System.out.println("\nWelcome to Split-It");
         System.out.println("\n\tAbout (A)");
