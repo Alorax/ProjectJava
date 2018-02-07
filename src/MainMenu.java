@@ -51,7 +51,7 @@ class Menu
     private char option;
     private Scanner scan = new Scanner(System.in);
 
-    public void displayMenu()
+    private void displayMenu()
     {
         System.out.println("\nWelcome to Split-It");
         System.out.println("\n\tAbout (A)");
@@ -89,20 +89,20 @@ class Menu
 
     private void newProject()
     {
-        Project p = new Project();
+        Project proiect = new Project();
         String[] names = new String[10];
         System.out.print("\n\tEnter the project name: ");
         String name = scan.next();
-        p.setName(name);
+        proiect.setName(name);
         System.out.print("\tEnter the number of team members: ");
         int NumberTeamMembers = scan.nextInt();
         System.out.println();
-        for (int i = 1; i <= n; i++)
+        for (int i = 1; i <= NumberTeamMembers; i++)
         {
             System.out.print("\t\tEnter the name of team member " + i + ": ");
             names[i] = scan.next();
         }
-        p.setNamesOfTeamMembers(names);
+        proiect.setNamesOfTeamMembers(names);
         System.out.print("\n\tPress any key to return to the Main Menu: ");
         if (scan.next() != null)
         {
