@@ -119,7 +119,7 @@ class Menu
     private int choose()
     {
         char userInput = scan.next().charAt(0);
-        option = Character.toLowerCase(userInput);
+        option = Character.toLowerCase(userInput); //enables the user to input either lowercase or uppercase characters.
         switch (option)
         {
             case 'a':
