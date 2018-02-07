@@ -1,4 +1,4 @@
-// This program is a Fair Grade Allocator, with the purpose of helping
+// This program is a "program" with the purpose of helping
 // teams allocate the credit for a project fairly so that all parties
 // are satisfied with the outcome.
 
