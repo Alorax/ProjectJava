@@ -16,7 +16,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Menu theMeniu = new Menu();
-        theMeniu.displayMenu();
+        Menu theMenu = new Menu();
+        theMenu.displayMenu();
     }
 }
