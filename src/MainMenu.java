@@ -73,7 +73,7 @@ class Menu
     private void about()
     {
         System.out.println("\n\tThis is a program designed to allocate credit fairly" +
-                " for a project based on each team member's contributions.");
+                " for a project, based on each team member's contributions.");
         System.out.print("\tPress any key to return to the Main Menu: ");
         if (scan.next() != null)
         {
