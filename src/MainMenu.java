@@ -95,9 +95,8 @@ class Menu
         String name = scan.next();
         p.setName(name);
         System.out.print("\tEnter the number of team members: ");
-        String NumberTeamMembers = scan.next();
+        int NumberTeamMembers = scan.nextInt();
         System.out.println();
-        int n = Integer.parseInt(NumberTeamMembers);
         for (int i = 1; i <= n; i++)
         {
             System.out.print("\t\tEnter the name of team member " + i + ": ");
