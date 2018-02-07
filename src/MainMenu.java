@@ -89,11 +89,11 @@ class Menu
 
     private void newProject()
     {
-        Project project = new Project();
+        Project theProject = new Project();
         String[] names = new String[10];
         System.out.print("\n\tEnter the project name: ");
         String name = scan.next();
-        project.setName(name);
+        theProject.setName(name);
         System.out.print("\tEnter the number of team members: ");
         int NumberTeamMembers = scan.nextInt();
         System.out.println();
@@ -102,7 +102,7 @@ class Menu
             System.out.print("\t\tEnter the name of team member " + i + ": ");
             names[i] = scan.next();
         }
-        project.setNamesOfTeamMembers(names);
+        theProject.setNamesOfTeamMembers(names);
         System.out.print("\n\tPress any key to return to the Main Menu: ");
         if (scan.next() != null)
         {
