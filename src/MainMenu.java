@@ -112,7 +112,7 @@ class Menu
 
 /*
 ------------------------------------------------------------------------------------
-    Allows user to choose an option from Main Menu.
+    Allows user to choose Main Menu option and redirects to associated page.
 ------------------------------------------------------------------------------------
 */
 
