@@ -5,13 +5,19 @@
 /* This program helps teams allocate the credit for a project fairly so that all
    parties are satisfied with the outcome.                                          */
 
-import java.util.Scanner;
 
+/*
+------------------------------------------------------------------------------------
+    This class allows users to create a new project.
+------------------------------------------------------------------------------------
+*/
+
+import java.util.Scanner;
 
 class Project
 {
-    String name;
-    String[] namesOfTeamMembers;
+    private String name;
+    private String[] namesOfTeamMembers;
 
     public String getName()
     {
@@ -34,10 +40,16 @@ class Project
     }
 }
 
+/*
+------------------------------------------------------------------------------------
+    This class prints out the Main Menu.
+------------------------------------------------------------------------------------
+*/
+
 class Menu
 {
     private char option;
-    Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     public void displayMenu()
     {
@@ -52,7 +64,13 @@ class Menu
         choose();
     }
 
-    public void about()
+/*
+------------------------------------------------------------------------------------
+    'About' page for when user chooses option 'A' from Main Menu.
+------------------------------------------------------------------------------------
+*/
+
+    private void about()
     {
         System.out.println("\n\tThis is a program designed to allocate credit fairly" +
                 " for a project based on each team member's contributions.");
@@ -63,7 +81,13 @@ class Menu
         }
     }
 
-    public void newProject()
+/*
+------------------------------------------------------------------------------------
+    'Create Project' page for when user chooses option 'C' from Main Menu.
+------------------------------------------------------------------------------------
+*/
+
+    private void newProject()
     {
         Project p = new Project();
         String[] names = new String[10];
@@ -71,7 +95,7 @@ class Menu
         String name = scan.next();
         p.setName(name);
         System.out.print("\tEnter the number of team members: ");
-        String NumberTeamMembers = scan.next(); //change this to scan for int.
+        String NumberTeamMembers = scan.next();
         System.out.println();
         int n = Integer.parseInt(NumberTeamMembers);
         for (int i = 1; i <= n; i++)
@@ -87,7 +111,13 @@ class Menu
         }
     }
 
-    public int choose()
+/*
+------------------------------------------------------------------------------------
+    Allows user to choose an option from Main Menu.
+------------------------------------------------------------------------------------
+*/
+
+    private int choose()
     {
         char userInput = scan.next().charAt(0);
         option = Character.toLowerCase(userInput);
