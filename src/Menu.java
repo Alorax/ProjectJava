@@ -92,14 +92,17 @@ class Menu
 
         while (valid == false)
         {
-            System.out.print("\nEnter the project name: ");
+           System.out.print("\nEnter the project name: ");
 
             projectName = scan.nextLine();
 
-            if (!Project.checkName(projectName))
+            if (!Project.checkName(projectName)|| !checkStringCharacters(projectName))
             {
-                System.out.println("\nInvalid input, the project name must contain only alphanumeric characters. " +
-                        "Try again.");
+                System.out.println("\nInvalid input, try again.");
+            }
+            else if(checkExistentTeams(projectName))
+            {
+                System.out.println("\nThis team name already exists.");
             }
             else
             {
@@ -309,6 +312,13 @@ class Menu
             }
         }
         return found;
+    }
+//----------------------------------------------------------------------------
+// Checks if the string contains only characters
+//----------------------------------------------------------------------------
+    private boolean checkStringCharacters(String name )
+    {
+        return name.matches("[a-zA-Z]+");
     }
 
 }
