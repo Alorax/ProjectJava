@@ -18,7 +18,8 @@ class Menu {
 //-----------------------------------------------------------------------------------
 
 
-    public void displayMenu() {
+    public void displayMenu()
+    {
         System.out.println("\nWelcome to Split-It");
         System.out.println("\n\tAbout (A)");
         System.out.println("\tCreate Project (C)");
@@ -35,12 +36,14 @@ class Menu {
 //-----------------------------------------------------------------------------------
 
 
-    private void about() {
+    private void about()
+    {
         System.out.println("\n\tThis is a program designed to allocate credit fairly" +
                 " for a project, based on each team member's contributions.");
         System.out.print("\tPress any key to return to the Main Menu: ");
 
-        if (scan.next() != null) {
+        if (scan.next() != null)
+        {
             displayMenu();
         }
     }
@@ -49,8 +52,8 @@ class Menu {
 //    Allows user to create new project, and enter project name and number of
 //    team members - by choosing option 'C' from Main Menu.
 //-----------------------------------------------------------------------------------
-    private void newProject() {
-
+    private void newProject()
+    {
         Project p = createProject();
         ProjectList.add(p);
         System.out.print("\n\tPress any key to return to the Main Menu: ");
@@ -59,7 +62,8 @@ class Menu {
         }
     }
 
-    private Project createProject() {
+    private Project createProject() 
+    {
         String projectName = getName();
         int numberOfParticipants = getNumberofTeamMembers();
 
@@ -71,12 +75,14 @@ class Menu {
     }
 
 
-    public String getName() {
+    public String getName() 
+    {
         String projectName = new String();
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
 
-        while (valid == false) {
+        while (valid == false) 
+        {
             System.out.print("\nEnter the project name: ");
 
             projectName = scan.nextLine();
