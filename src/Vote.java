@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 
 //-----------------------------------------------------------------------------------
-//    Stores the votes of each member
+//    Stores the votes of each member.
 //-----------------------------------------------------------------------------------
 
 public class Vote
