@@ -3,9 +3,11 @@
 // Program last updated: 5th March 2018.
 
 import java.util.ArrayList;
+
 //-----------------------------------------------------------------------------------
 //    Stores the votes of each member
 //-----------------------------------------------------------------------------------
+
 public class Vote
 {
 
