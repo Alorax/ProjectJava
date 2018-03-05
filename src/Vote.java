@@ -2,7 +2,7 @@
 // Authors: Miruna Serian and Anima Sutradhar.
 // Program last updated: 5th March 2018.
 
-mport java.util.ArrayList;
+import java.util.ArrayList;
 //-----------------------------------------------------------------------------------
 //    Store the votes of each member
 //-----------------------------------------------------------------------------------
