@@ -2,31 +2,21 @@
 // Authors: Miruna Serian and Anima Sutradhar.
 // Program last updated: 5th March 2018.
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.*;
 
-
-//-----------------------------------------------------------------------------------
-//    ***
-//-----------------------------------------------------------------------------------
-
-class Menu
-{
+class Menu {
     ArrayList<Project> ProjectList = new ArrayList<Project>();
-    ArrayList<Votes> listOfProjectsAndVotes = new ArrayList<>();
+    ArrayList<VotesAllocation> listOfProjectsAndVotes = new ArrayList<>();
+    ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile = new ArrayList<>();
     private char option;
     private Scanner scan = new Scanner(System.in);
+    private static String fileName = "NewProject.txt";
 
 //-----------------------------------------------------------------------------------
 //    Displays the 'Main Menu' and allows user to choose options.
 //-----------------------------------------------------------------------------------
+
 
     public void displayMenu()
     {
@@ -45,13 +35,15 @@ class Menu
 //    Displays the 'About' page for when user chooses option 'A' from Main Menu.
 //-----------------------------------------------------------------------------------
 
+
     private void about()
     {
         System.out.println("\n\tThis is a program designed to allocate credit fairly" +
                 " for a project, based on each team member's contributions.");
         System.out.print("\tPress any key to return to the Main Menu: ");
 
-        if (scan.next() != null) {
+        if (scan.next() != null)
+        {
             displayMenu();
         }
     }
@@ -60,202 +52,260 @@ class Menu
 //    Allows user to create new project, and enter project name and number of
 //    team members - by choosing option 'C' from Main Menu.
 //-----------------------------------------------------------------------------------
-
     private void newProject()
     {
         Project p = createProject();
         ProjectList.add(p);
         System.out.print("\n\tPress any key to return to the Main Menu: ");
-        if (scan.next() != null)
-        {
+        if (scan.next() != null) {
             displayMenu();
         }
     }
 
-    private Project createProject()
+    private Project createProject() 
     {
         String projectName = getName();
         int numberOfParticipants = getNumberofTeamMembers();
 
-        String[] memberNames = getNamesOfTeamMembers(numberOfParticipants);
+        String[] teamNames = getNamesOfTeamMembers(numberOfParticipants);
 
-        Project p = new Project(projectName, numberOfParticipants, memberNames);
+        Project p = new Project(projectName, numberOfParticipants, teamNames);
 
         return p;
     }
 
-    public String getName()
+
+    public String getName() 
     {
         String projectName = new String();
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
 
-        while (valid == false)
+        while (valid == false) 
         {
-           System.out.print("\nEnter the project name: ");
+            System.out.print("\nEnter the project name: ");
 
             projectName = scan.nextLine();
 
-            if (!Project.checkName(projectName)|| !checkStringCharacters(projectName))
-            {
+            if (!Project.checkName(projectName)) {
                 System.out.println("\nInvalid input, try again.");
-            }
-            else if(checkExistentTeams(projectName))
-            {
-                System.out.println("\nThis team name already exists.");
-            }
-            else
-            {
-                valid = true;
+            } else {
+                if (checkIfProjectExists(projectName))
+                    System.out.println("\n This project already exists");
+                else
+                    valid = true;
             }
         }
         return projectName;
     }
 
-    public int getNumberofTeamMembers()
-    {
+    public boolean checkIfProjectExists(String name) {
+       // for (VotesAllocation votesAllocation : listOfProjectsAndVotesFromFile) {
+            if (searchProject(name) != null) {
+                return true;
+            }
+
+        return false;
+    }
+//-----------------------------------------------------------------------------------
+//    Asks for user input and checks if it is an integer and not a character or decimal point number
+//    when entering number of team members.
+//-----------------------------------------------------------------------------------
+    public int getNumberofTeamMembers() {
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
         String n;
         int numberOfMembers = 0;
 
-        while (valid == false)
-        {
+        while (valid == false) {
             System.out.print("\nEnter the number of team members: ");
 
             n = scan.next();
-
-            if(numberOk(n))
-            {
+            Tester test = new Tester();
+            if (test.isNumber(n)) {
                 numberOfMembers = Integer.parseInt(n);
-                if (Project.checkNumberOfMembers(numberOfMembers))
-                {
+                if (Project.checkNumberOfMembers(numberOfMembers)) {
                     valid = true;
-                }
-                else
-                {
+                } else {
                     System.out.println("\nProjects can have between " +
                             Project.MINMEMBERS + " and " +
                             Project.MAXMEMBERS + " members, try again.");
                 }
-            }
-            else
-            {
+            } else
                 System.out.println("Not a number. Try again!");
-            }
         }
         return numberOfMembers;
     }
-
 //-----------------------------------------------------------------------------------
-//    Checks if user enters an integer and not a character or decimal point number
-//    when entering number of team members.
+//    Validates if the name of the participant introduced already exists
 //-----------------------------------------------------------------------------------
 
-    public boolean numberOk(String validInteger)
-    {
-        boolean valid = false;
-        try
-        {
-            Integer.parseInt(validInteger);
-            valid = true;
+    public boolean checkIfMemberExists(String name, String[] namesOfTeamMembers) {
+        if (namesOfTeamMembers != null) {
+            for (int i = 0; i < namesOfTeamMembers.length; i++)
+                if (name.equals(namesOfTeamMembers[i]))
+                    return true;
         }
-        catch (Exception ex)
-        {
-            //not an integer
-        }
-        return valid;
+        return false;
     }
-
 //-----------------------------------------------------------------------------------
-//    Allows user to enter team member names after creating a new project.
+//    Gets the names of each member and validates the names
 //-----------------------------------------------------------------------------------
+    public String[] getNamesOfTeamMembers(int numberOfParticipants) {
 
-    public String[] getNamesOfTeamMembers(int numberOfParticipants)
-    {
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
 
         String[] names = new String[Project.MAXMEMBERS];
 
-        for (int i = 0; i < numberOfParticipants; i++)
-        {
+        for (int i = 0; i < numberOfParticipants; i++) {
             valid = false;
-            while (valid == false)
-            {
+            while (valid == false) {
                 System.out.print("\nEnter team member's name: ");
                 String name = scan.nextLine();
-                if (Project.checkName(name))
-                {
-                    valid = true;
-                    names[i] = name;
-                }
-                else
-                {
-                    System.out.println("\nA name must contain only alphanumeric characters and be between " +
-                            Project.MINNAMELENGTH + " and " + Project.MAXNAMELENGTH +
-                            " characters, try again.");
-                }
+                if (!checkIfMemberExists(name, names)) {
+                    if (Project.checkName(name)) {
+                        valid = true;
+                        names[i] = name;
+                    } else {
+                        System.out.println("\nA name must contain only alphanumeric characters and be between " +
+                                Project.MINNAMELENGTH + " and " + Project.MAXNAMELENGTH +
+                                " characters, try again.");
+                    }
+                } else
+                    System.out.println("\n This member already exists! Try again!");
+
             }
         }
         return names;
     }
-
 //-----------------------------------------------------------------------------------
-//    Allows user to enter votes for each of the team members by accessing a specific
-//    existing project name. If project does not exist, outputs error message.
+//    Reads the created file and looks for if the project exists
 //-----------------------------------------------------------------------------------
-
-    public void enterVotes()
-    {
+    public Project searchProjectInFile(String nameOfProject) {
         int found = 0;
-        Project p = null ;
-        System.out.print("\nEnter the project name: ");
-        String nameOfProject = scan.next();
+        Project p = null;
 
-        for (int index= 0; index< ProjectList.size(); index++)
-        {
-            if (ProjectList.get(index).getName().equals(nameOfProject))
-            {
+        for (VotesAllocation votesAllocation : listOfProjectsAndVotesFromFile) {
+            if (votesAllocation.getProject().getName().equals(nameOfProject)) {
                 found = 1;
-                p = ProjectList.get(index);
+                p = votesAllocation.getProject();
                 break;
             }
         }
-
-        if(found == 0)
-        {
-            System.out.println("\nThe project with name " + nameOfProject + " was not found. Try again!");
-            displayMenu();
-        }
-
-        if(found == 1)
-            if(p != null)
-            {
-                System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
-                Votes v = new Votes(p);
-                v.getVotes();
-                listOfProjectsAndVotes.add(v);
-            }
-        System.out.print("\n\tPress any key to return to the Main Menu: ");
-        if (scan.next() != null)
-        {
-            displayMenu();
-        }
-
+        return p;
     }
 
+    public Project searchProject(String nameOfProject) {
+        int found = 0;
+        Project p = null;
+        p = searchProjectInFile(nameOfProject);
+        if (p == null) {
+            for (int index = 0; index < ProjectList.size(); index++) {
+                if (ProjectList.get(index).getName().equals(nameOfProject)) {
+                    found = 1;
+                    p = ProjectList.get(index);
+                    break;
+                }
+            }
+        }
+        return p;
+    }
 //-----------------------------------------------------------------------------------
-//    Allows user to choose from Main Menu options to navigate around the app.
-//    Different letters correspond to different pages that the user gets directed to.
+//    Searches for the projects which votes are already allocated
 //-----------------------------------------------------------------------------------
+    public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject) {
+        int found = 0;
+        VotesAllocation votesAllocation = null;
 
+        for (VotesAllocation v : listOfProjectsAndVotesFromFile) {
+            if (v.getProject().getName().equals(nameOfProject)) {
+                found = 1;
+                votesAllocation = v;
+                break;
+            }
+        }
+        return votesAllocation;
+    }
+
+    public VotesAllocation  searchAllocatedVotesProject(String nameOfProject) {
+        int found = 0;
+        VotesAllocation v = null;
+        v = searchAllocatedVotesProjectInFile(nameOfProject);
+        if(v == null) {
+            for (int index = 0; index < listOfProjectsAndVotesFromFile.size(); index++) {
+                if (listOfProjectsAndVotesFromFile.get(index).getProject().getName().equals(nameOfProject)) {
+                    found = 1;
+                    v= listOfProjectsAndVotesFromFile.get(index);
+                    break;
+                }
+            }
+        }
+        return v;
+    }
+//-----------------------------------------------------------------------------------
+//    Prompts user to introduce votes
+//-----------------------------------------------------------------------------------
+        public void enterVotes () {
+            int found = 0;
+            Project p = null;
+            System.out.print("\nEnter the project name: ");
+            String nameOfProject = scan.next();
+
+            p = searchProject(nameOfProject);
+
+            if (p == null) {
+                System.out.println("\nThe project with name " + nameOfProject + " was not found. Try again!");
+                enterVotes();
+            }
+
+            if (p != null) {
+                System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
+                {
+                    VotesAllocation vFound = searchAllocatedVotesProject(nameOfProject);
+                    if (vFound != null)
+                        if (vFound.getList() != null) {
+                            System.out.println("This projects has votes allocated already! Try again!");
+                            enterVotes();
+                        }
+//-----------------------------------------------------------------------------------
+//    For next deliverable
+//    Allows user to edit previous votes                  
+//-----------------------------------------------------------------------------------
+                     /* 
+                      System.out.println(" Do you want to edit this project?" (y/n));
+                      String userInput= scan.next();
+                      if(userInput.equals ) {
+                      VotesAllocation v = searchAllocatedVotesProject(nameOfProject);
+                      v.getVotes();
+                      //v.setList(); // the new list of votes
+                      StoreData.editData(nameOfProject, v.toString());
+                      }
+                  } else {
+
+                  }
+              }
+          }
+                 else {*/
+                    VotesAllocation v = new VotesAllocation(p);
+                    v.getVotes();
+                    listOfProjectsAndVotes.add(v);
+
+                }
+            }
+            System.out.print("\n\tPress any key to return to the Main Menu: ");
+            if (scan.next() != null) {
+                displayMenu();
+            }
+        }
+//-----------------------------------------------------------------------------------
+//   Menu Selection 
+//-----------------------------------------------------------------------------------
     private int choose()
     {
         char userInput = scan.next().charAt(0);
         option = Character.toLowerCase(userInput); //enables the user to input either lowercase or uppercase characters.
-        switch (option)
-        {
+        switch (option) {
             case 'a':
                 about();
             case 'c':
@@ -263,62 +313,49 @@ class Menu
             case 'v':
                 enterVotes();
             case 's':
-                displayMenu();
+                showProjectPointAllocation();
             case 'q':
                 quit();
-            default:
-            {
+            default: {
                 System.out.println("Please choose another option: ");
+                choose();
             }
         }
 
         return 0;
     }
-
-    //--------------------------------------------------------------
-    // QUIT - when user quits, the project is stored in a text file.
+//-----------------------------------------------------------------------------------
+//    When user quits, information is saved in a file.
+//-----------------------------------------------------------------------------------
+    
     private void quit()
     {
         storeInformations(listOfProjectsAndVotes);
         System.exit(0);
     }
-    //--------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------
-//    Stores the project in a .txt file.
-//-----------------------------------------------------------------------------------
 
-    public void storeInformations(ArrayList<Votes> v)
-    {
-        // System.out.println(v.toString());
-        StoreData data = new StoreData(v);
+//-------------------------------------------------------------------------
+//  Store Project
+//-----------------------------------------------------------------------
+    public void storeInformations(ArrayList<VotesAllocation> v) {
+       // System.out.println(v.toString());
+        StoreData data = new StoreData(v,fileName);
         data.writeData();
     }
-//----------------------------------------------------------------------------
-// Checks if the name of the Team already exists
-//----------------------------------------------------------------------------
 
-    private boolean checkExistentTeams(String aName)
-    {
-        boolean found = false;
-        Project p = null;
-        ;
-
-        for (int index = 0; index < ProjectList.size(); index++) {
-            if (ProjectList.get(index).getName().equals(aName)) {
-                found = true;
-                p = ProjectList.get(index);
-                break;
-            }
+    public void showProjectPointAllocation(){
+        System.out.println("Informations about Project");
+        System.out.print("\n\tPress any key to return to the Main Menu: ");
+        if (scan.next() != null) {
+            displayMenu();
         }
-        return found;
+//-----------------------------------------------------------------------------------
+//   Reads the file containing the team information and votes
+//-----------------------------------------------------------------------------------
     }
-//----------------------------------------------------------------------------
-// Checks if the string contains only characters
-//----------------------------------------------------------------------------
-    private boolean checkStringCharacters(String name )
-    {
-        return name.matches("[a-zA-Z]+");
+    public void readDataFromFile() {
+        StoreData data = new StoreData(fileName);
+        listOfProjectsAndVotesFromFile = data.readData();
     }
-
 }
