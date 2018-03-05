@@ -291,5 +291,24 @@ class Menu
         StoreData data = new StoreData(v);
         data.writeData();
     }
+//----------------------------------------------------------------------------
+// Checks if the name of the Team already exists
+//----------------------------------------------------------------------------
+
+    private boolean checkExistentTeams(String aName)
+    {
+        boolean found = false;
+        Project p = null;
+        ;
+
+        for (int index = 0; index < ProjectList.size(); index++) {
+            if (ProjectList.get(index).getName().equals(aName)) {
+                found = true;
+                p = ProjectList.get(index);
+                break;
+            }
+        }
+        return found;
+    }
 
 }
