@@ -2,69 +2,51 @@
 // Authors: Miruna Serian and Anima Sutradhar.
 // Program last updated: 5th March 2018.
 
-import java.util.ArrayList;
-
+mport java.util.ArrayList;
 //-----------------------------------------------------------------------------------
-//    ***
+//    Store the votes of each member
 //-----------------------------------------------------------------------------------
+public class Vote {
 
-public class Vote
-{
-    String member;
-    ArrayList<Member> listOfMembersAndVotes ;
+   private String member;
 
-    public Vote(String member,ArrayList<Member> listOfMembersAndVotes)
-    {
-        this.member = member;
+   private ArrayList<Member> listOfMembersAndVotes ;
+
+    public Vote(String member,ArrayList<Member> listOfMembersAndVotes) {
+        this.member =member;
         this.listOfMembersAndVotes = listOfMembersAndVotes;
     }
 
-    public String getMember()
-    {
+    public String getMember() {
         return member;
     }
 
-    public void setMember(String member)
-    {
+    public void setMember(String member) {
         this.member = member;
     }
 
-    public ArrayList<Member> getListOfMembersAndVotes()
-    {
+    public ArrayList<Member> getListOfMembersAndVotes() {
         return listOfMembersAndVotes;
     }
 
-    public void setListOfMembersAndVotes(ArrayList<Member> listOfMembersAndVotes)
-    {
+    public void setListOfMembersAndVotes(ArrayList<Member> listOfMembersAndVotes) {
         this.listOfMembersAndVotes = listOfMembersAndVotes;
     }
 
-//-----------------------------------------------------------------------------------
-//    Specifies the format the name of the team members and team member votes (input
-//    by user) should be stored in, in the .txt file.
-//-----------------------------------------------------------------------------------
-
-    public String printListOfMemberAndVotes()
-    {
+    public String  printListOfMemberAndVotes(){
         String list = null;
 
         if(listOfMembersAndVotes != null)
-            list = listOfMembersAndVotes.get(0).toString();
+           list = listOfMembersAndVotes.get(0).toString();
 
         for (int index = 1; index < listOfMembersAndVotes.size(); index ++)
-            list = list + " , " + listOfMembersAndVotes.get(index).toString();
+              list = list + " , " + listOfMembersAndVotes.get(index).toString();
 
         return list;
     }
 
-//-----------------------------------------------------------------------------------
-//    Specifies the format the name of the team member (input by user) should be
-//    stored in, in the .txt file.
-//-----------------------------------------------------------------------------------
-
     @Override
-    public String toString()
-    {
-        return member + " , " + printListOfMemberAndVotes();
+    public String toString() {
+        return  member + " , " + printListOfMemberAndVotes();
     }
 }
