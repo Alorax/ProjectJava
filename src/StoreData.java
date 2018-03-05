@@ -1,10 +1,12 @@
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-//----------------------------------------------------------------
-// Stores the information about each Project and read the file so that
-//it can access the data and edit it
-//----------------------------------------------------------------
+
+//------------------------------------------------------------------------------------
+//    Stores the information about each Project and allows the user to read the file
+//    so that they can access the data and edit it.
+//------------------------------------------------------------------------------------
+
 public class StoreData 
 {
     static ArrayList<VotesAllocation> v = new ArrayList<VotesAllocation>();
