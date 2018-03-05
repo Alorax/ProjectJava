@@ -22,7 +22,6 @@ public class StoreData
     {
         this.v = v;
         this.fileName = fileName;
-
     }
 
     public static void writeData() 
@@ -50,12 +49,11 @@ public class StoreData
                 System.out.println("error : " + ex);
             }
         }
-
-
     }
-//----------------------------------------------------------------
-// Allows user to edit the data in the file
-//----------------------------------------------------------------
+
+//------------------------------------------------------------------------------------
+//    Allows user to edit the data in the text file.
+//------------------------------------------------------------------------------------
 
     public static void editData( String name, String replaceLine) 
     {
@@ -93,9 +91,11 @@ public class StoreData
             System.out.println("Problem reading file.");
         }
     }
-//----------------------------------------------------------------
-// Stores the information from each Project
-//----------------------------------------------------------------
+    
+//------------------------------------------------------------------------------------
+//    Stores the information from each Project.
+//------------------------------------------------------------------------------------
+    
     public ArrayList<VotesAllocation> readData() 
     {
         ArrayList<VotesAllocation> votesAllocations = new ArrayList<VotesAllocation>();
