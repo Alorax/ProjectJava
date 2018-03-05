@@ -226,7 +226,7 @@ class Menu
         if(found == 0)
         {
             System.out.println("\nThe project with name " + nameOfProject + " was not found. Try again!");
-            enterVotes();
+            displayMenu();
         }
 
         if(found == 1)
