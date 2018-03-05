@@ -57,14 +57,17 @@ public class StoreData
 
     public static void editData( String name, String replaceLine) 
     {
-        try {
+        try 
+        {
             BufferedReader file = new BufferedReader(new FileReader(fileName));
             String line;
 
-            while ((line = file.readLine()) != null) {
+            while ((line = file.readLine()) != null)
+            {
                 String[] s = line.split(" , ");
                 String nameOfProject = s[0];
-                if(s[0].equals(name)) {
+                if(s[0].equals(name)) 
+                {
                     line = "";
                     writer.write(replaceLine);
                 }
@@ -83,26 +86,31 @@ public class StoreData
             fileOut.write(inputStr.getBytes());
             fileOut.close();
 
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             System.out.println("Problem reading file.");
         }
     }
 //----------------------------------------------------------------
 // Stores the information from each Project
 //----------------------------------------------------------------
-    public ArrayList<VotesAllocation> readData() {
+    public ArrayList<VotesAllocation> readData() 
+    {
         ArrayList<VotesAllocation> votesAllocations = new ArrayList<VotesAllocation>();
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) 
+        {
             String line;
             String[] s;
             ArrayList<VotesAllocation> v = new ArrayList<VotesAllocation>();
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) 
+            {
                 s = line.split(" , ");
                 String nameOfProject = s[0];
                 int numberOfMembers = Integer.parseInt(s[1]);
                 String[] nameOfMembers = new String[numberOfMembers];
                 int nr = 0;
-                for (int index = 2; index < 2 + numberOfMembers; index++) {
+                for (int index = 2; index < 2 + numberOfMembers; index++) 
+                {
                     nameOfMembers[nr] = s[index];
                     nr++;
 
@@ -113,12 +121,13 @@ public class StoreData
                 int lengthOfListOfMemberAndVotes = 1 + 2 * (numberOfMembers - 1);
                 ArrayList<Vote> listOfGroupsOfMemberAndVotes = new ArrayList<Vote>();
 
-                for (int j = 2 + numberOfMembers; j < s.length ; j = j + lengthOfListOfMemberAndVotes) {
-
+                for (int j = 2 + numberOfMembers; j < s.length ; j = j + lengthOfListOfMemberAndVotes) 
+                {
                     String memberWhoGaveTheNote = s[j];
                     ArrayList<Member> listOfMemberAndVotes = new ArrayList<Member>();
 
-                    for (int i = j + 1; i < j + lengthOfListOfMemberAndVotes ; i = i + 2) {
+                    for (int i = j + 1; i < j + lengthOfListOfMemberAndVotes ; i = i + 2) 
+                    {
                         Member member = new Member(s[i], Integer.parseInt(s[i + 1]));
                         listOfMemberAndVotes.add(member);
                     }
@@ -129,7 +138,9 @@ public class StoreData
                 VotesAllocation votesAllocation = new VotesAllocation(project, listOfGroupsOfMemberAndVotes);
                 votesAllocations.add(votesAllocation);
             }
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
             System.out.println("error: " + ex);
         }
        return votesAllocations;
