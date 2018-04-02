@@ -1,6 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class ProjectPointAllocation 
 {
@@ -84,9 +84,9 @@ public class ProjectPointAllocation
             }
         }
 }
---------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------
 //this calculates the ratios 
--------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
     public void pointAllocationOfMember(Member member, double r)
    {
         int i = 0;
