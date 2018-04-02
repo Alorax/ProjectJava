@@ -1,8 +1,8 @@
 //----------------------------------------------------------------
 // Stores the information for each member
 //----------------------------------------------------------------
-public class Member {
-
+public class Member 
+{
     private String name;
     private int vote;
     private double ratio;
@@ -12,48 +12,51 @@ public class Member {
     {
         this.name = name;
         this.vote = vote;
-        this.ratio = 1;
+        this.ratio = 1.0D;
     }
 
-    public String getName() {
-        return name;
+    public String getName() 
+    {
+        return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
-    public int getVote() {
-        return vote;
+    public int getVote() 
+    {
+        return this.vote;
     }
 
     public void setVote(int vote) 
     {
         this.vote = vote;
     }
-    
-     public double getRatio() 
-     {
-        return ratio;
+
+    public double getRatio() 
+    {
+        return this.ratio;
     }
 
-    public void setRatio(double ratio)
+    public void setRatio(double ratio) 
     {
         this.ratio = ratio;
     }
 
     public double getFinalShare() 
     {
-        return finalShare;
+        return this.finalShare;
     }
 
     public void setFinalShare(double finalShare) 
     {
         this.finalShare = finalShare;
     }
-    @Override
+
     public String toString() 
     {
-        return name + " , " + vote;
+        return this.name + " , " + this.vote;
     }
 }
