@@ -62,37 +62,31 @@ class Project implements Serializable
         this.numberOfTeamMembers = numberOfTeamMembers;
     }
 
-    public String getName() 
-    {
+    public String getName() {
         return name;
     }
 
-    public String[] getNamesOfTeamMembers() 
-    {
+    public String[] getNamesOfTeamMembers() {
         return namesOfTeamMembers;
     }
 
-    public int getNumberOfTeamMembers() 
-    {
+    public int getNumberOfTeamMembers() {
         return numberOfTeamMembers;
     }
 
-    public String printNamesOfTeamMembers(String[] namesOfTeamMembers) 
-    {
+    public String printNamesOfTeamMembers(String[] namesOfTeamMembers) {
         String names=null;
         if(namesOfTeamMembers !=  null)
             names = namesOfTeamMembers[0];
 
-        for (int index = 1 ; index < namesOfTeamMembers.length; index ++ )
-        {
+        for (int index = 1 ; index < namesOfTeamMembers.length; index ++ ){
             if(namesOfTeamMembers[index] != null)
               names = names + " , " + namesOfTeamMembers[index];
         }
         return names;
     }
     @Override
-    public String toString() 
-    {
+    public String toString() {
         return  name + " , " + numberOfTeamMembers +" , " + printNamesOfTeamMembers(namesOfTeamMembers);
 
     }
@@ -131,11 +125,10 @@ class Project implements Serializable
         return nameOK;
     }
 //---------------------------------------------------
-    // validate number of members
+    // validate numberof members
     //-----------------------------------------------
 
-    static boolean checkNumberOfMembers(int theNumberOfMembers) 
-    {
+    static boolean checkNumberOfMembers(int theNumberOfMembers) {
         return (theNumberOfMembers >= MINMEMBERS && theNumberOfMembers <= MAXMEMBERS);
     }
     //--------------------------------------------
@@ -157,15 +150,12 @@ class Project implements Serializable
         }
         return TeamOK;
     }
-    public Project searchProjectInFile( String nameOfProject,ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile) 
-    {
+    public Project searchProjectInFile( String nameOfProject,ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile) {
         int found = 0;
         Project p = null;
 
-        for(VotesAllocation votesAllocation:listOfProjectsAndVotesFromFile)
-        {
-            if(votesAllocation.getProject().getName().equals(nameOfProject))
-            {
+        for(VotesAllocation votesAllocation:listOfProjectsAndVotesFromFile){
+            if(votesAllocation.getProject().getName().equals(nameOfProject)){
                 found = 1;
                 p=votesAllocation.getProject();
                 break;
@@ -178,12 +168,9 @@ class Project implements Serializable
         int found = 0;
         Project p= null;
         p = searchProjectInFile(nameOfProject,listOfProjectsAndVotesFromFile);
-        if(p == null) 
-        {
-            for (int index = 0; index < ProjectList.size(); index++) 
-            {
-                if (ProjectList.get(index).getName().equals(nameOfProject)) 
-                {
+        if(p == null) {
+            for (int index = 0; index < ProjectList.size(); index++) {
+                if (ProjectList.get(index).getName().equals(nameOfProject)) {
                     found = 1;
                     p = ProjectList.get(index);
                     break;
