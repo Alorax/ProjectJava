@@ -1,0 +1,117 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ProjectPointAllocation 
+{
+    private ArrayList<VotesAllocation> votesAllocationList;
+    private Menu menu= new Menu();
+    private Member[] listOfMembers;
+
+    public ProjectPointAllocation(ArrayList<VotesAllocation> votesAllocationList)
+    {
+        this.votesAllocationList= votesAllocationList;
+
+    }
+
+    public void setListOfMembers(Project p)
+    {
+        Member[] listOfMembers = new Member[p.getNumberOfTeamMembers()];
+        for(int i = 0; i< listOfMembers.length;i++)
+        {
+            listOfMembers[i] = new Member(p.getNamesOfTeamMembers()[i],0);
+//            listOfMembers[i].setName(p.getNamesOfTeamMembers()[i]);
+        }
+        this.listOfMembers = listOfMembers;
+    }
+
+    public Project  searchInProject(String name)
+    {
+        Project p = null;
+        for(VotesAllocation votesAllocation:votesAllocationList)
+            if(votesAllocation.getProject().getName().equals(name))
+            {
+                p = votesAllocation.getProject();
+                break;
+            }
+
+            return p;
+
+    }
+
+    public void showProjectPointAllocation() 
+    {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("\nEnter project name: ");
+        String nameOfProject = scan.next();
+        Project p = searchInProject(nameOfProject);
+
+        if (p == null) 
+        {
+            System.out.println("The project " + nameOfProject + " doesn't exist.Try again! ");
+            showProjectPointAllocation();
+        }
+        if (p != null) 
+        {
+            System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
+            calculatePointsAllocation(p);
+            showVotes();
+        }
+    }
+
+    public void calculatePointsAllocation(Project p) 
+    {
+        Tester test = new Tester();
+        this.setListOfMembers(p);
+
+        for (VotesAllocation votesAllocation : votesAllocationList) 
+        {
+            if (votesAllocation.getProject().equals(p)) 
+            {
+                ArrayList<Vote> list = votesAllocation.getList();
+
+                for(Vote v : list) 
+                {
+                 //   System.out.println(v.toString());
+                    ArrayList<Member> listOfMemberAndVotes = v.getListOfMembersAndVotes();
+                   // System.out.println(listOfMemberAndVotes.toString());
+                    for(Member member: listOfMemberAndVotes) 
+                    {
+                     //   System.out.println(member.toString());
+                        pointAllocationOfMember(member);
+                    }
+                }
+
+            }
+        }
+    }
+}
+--------------------------------------------------------------------------------------------
+//this calculates the ratios - still not finished
+-------------------------------------------------------------------------------------------
+    public void pointAllocationOfMember(Member member)
+    {
+        int i = 0;
+        for(Member m:listOfMembers){
+            if(m.getName().equals(member.getName()))
+            {
+                int vote = m.getVote();
+                vote = vote + member.getVote(); /// or the other method to calculate the vote
+                listOfMembers[i].setVote(vote);
+            }
+            i++;
+        }
+    }
+
+    public void showVotes()
+    {
+        System.out.println("The point allocation based on votes is: ");
+        for(int i=0; i<listOfMembers.length; i++) 
+        {
+            System.out.println(listOfMembers[i].getName()+ " : " + listOfMembers[i].getVote());
+        }
+
+    }
+
+}
