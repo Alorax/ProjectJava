@@ -3,8 +3,10 @@
 //----------------------------------------------------------------
 public class Member {
 
-    String name;
-    int vote;
+    private String name;
+    private int vote;
+    private double ratio;
+    private double finalShare;
 
     public Member(String name, int vote) 
     {
