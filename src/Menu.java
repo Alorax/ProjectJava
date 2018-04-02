@@ -202,7 +202,7 @@ class Menu
         Project p = null;
         p = searchProjectInFile(nameOfProject);
         if (p == null) {
-            for (int index = 0; index < ProjectList.size(); index++) '
+            for (int index = 0; index < ProjectList.size(); index++) 
             {
                 if (ProjectList.get(index).getName().equals(nameOfProject)) 
                 {
