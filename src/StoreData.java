@@ -1,11 +1,5 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-//------------------------------------------------------------------------------------
-//    Stores the information about each Project and allows the user to read the file
-//    so that they can access the data and edit it.
-//------------------------------------------------------------------------------------
 
 public class StoreData 
 {
@@ -22,6 +16,7 @@ public class StoreData
     {
         this.v = v;
         this.fileName = fileName;
+
     }
 
     public static void writeData() 
@@ -34,12 +29,10 @@ public class StoreData
                 writer.write(v.get(index).toString());
                 writer.write(System.getProperty( "line.separator" ));
             }
-        } 
-        catch (IOException ex) 
+        } catch (IOException ex) 
         {
             System.out.println("error: " + ex);
-        } 
-        finally 
+        } finally 
         {
             try 
             {
@@ -49,11 +42,9 @@ public class StoreData
                 System.out.println("error : " + ex);
             }
         }
-    }
 
-//------------------------------------------------------------------------------------
-//    Allows user to edit the data in the text file.
-//------------------------------------------------------------------------------------
+
+    }
 
     public static void editData( String name, String replaceLine) 
     {
@@ -62,7 +53,7 @@ public class StoreData
             BufferedReader file = new BufferedReader(new FileReader(fileName));
             String line;
 
-            while ((line = file.readLine()) != null)
+            while ((line = file.readLine()) != null) 
             {
                 String[] s = line.split(" , ");
                 String nameOfProject = s[0];
@@ -91,11 +82,7 @@ public class StoreData
             System.out.println("Problem reading file.");
         }
     }
-    
-//------------------------------------------------------------------------------------
-//    Stores the information from each Project.
-//------------------------------------------------------------------------------------
-    
+
     public ArrayList<VotesAllocation> readData() 
     {
         ArrayList<VotesAllocation> votesAllocations = new ArrayList<VotesAllocation>();
@@ -115,7 +102,6 @@ public class StoreData
                 {
                     nameOfMembers[nr] = s[index];
                     nr++;
-
                 }
 
                 Project project = new Project(nameOfProject, numberOfMembers, nameOfMembers);
@@ -140,8 +126,7 @@ public class StoreData
                 VotesAllocation votesAllocation = new VotesAllocation(project, listOfGroupsOfMemberAndVotes);
                 votesAllocations.add(votesAllocation);
             }
-        } 
-        catch (Exception ex) 
+        } catch (Exception ex) 
         {
             System.out.println("error: " + ex);
         }
@@ -150,3 +135,4 @@ public class StoreData
     }
 
 }
+
