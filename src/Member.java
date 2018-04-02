@@ -3,12 +3,16 @@
 //----------------------------------------------------------------
 public class Member {
 
-    String name;
-    int vote;
+    private String name;
+    private int vote;
+    private double ratio;
+    private double finalShare;
 
     public Member(String name, int vote) {
         this.name = name;
         this.vote = vote;
+        this.ratio = 1;
+
     }
 
     public String getName() {
@@ -25,6 +29,22 @@ public class Member {
 
     public void setVote(int vote) {
         this.vote = vote;
+    }
+
+    public double getRatio() {
+        return ratio;
+    }
+
+    public void setRatio(double ratio) {
+        this.ratio = ratio;
+    }
+
+    public double getFinalShare() {
+        return finalShare;
+    }
+
+    public void setFinalShare(double finalShare) {
+        this.finalShare = finalShare;
     }
 
     @Override

@@ -1,4 +1,6 @@
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +22,6 @@ public class ProjectPointAllocation
         for(int i = 0; i< listOfMembers.length;i++)
         {
             listOfMembers[i] = new Member(p.getNamesOfTeamMembers()[i],0);
-//            listOfMembers[i].setName(p.getNamesOfTeamMembers()[i]);
         }
         this.listOfMembers = listOfMembers;
     }
@@ -69,47 +70,58 @@ public class ProjectPointAllocation
         {
             if (votesAllocation.getProject().equals(p)) 
             {
+
                 ArrayList<Vote> list = votesAllocation.getList();
 
                 for(Vote v : list) 
                 {
-                 //   System.out.println(v.toString());
                     ArrayList<Member> listOfMemberAndVotes = v.getListOfMembersAndVotes();
-                   // System.out.println(listOfMemberAndVotes.toString());
-                    for(Member member: listOfMemberAndVotes) 
+                    for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2) 
                     {
-                     //   System.out.println(member.toString());
-                        pointAllocationOfMember(member);
+                        pointAllocationOfMember(listOfMemberAndVotes.get(i),listOfMemberAndVotes.get(i).getVote() / (double)listOfMemberAndVotes.get(i + 1).getVote());
+                        pointAllocationOfMember(listOfMemberAndVotes.get(i+1),listOfMemberAndVotes.get(i+1).getVote() / (double)listOfMemberAndVotes.get(i).getVote());
                     }
+
                 }
 
             }
         }
     }
-}
---------------------------------------------------------------------------------------------
-//this calculates the ratios - still not finished
--------------------------------------------------------------------------------------------
-    public void pointAllocationOfMember(Member member)
+
+    public void pointAllocationOfMember(Member member,double r)
     {
         int i = 0;
-        for(Member m:listOfMembers){
-            if(m.getName().equals(member.getName()))
-            {
-                int vote = m.getVote();
-                vote = vote + member.getVote(); /// or the other method to calculate the vote
-                listOfMembers[i].setVote(vote);
+        double denominator = r;
+        for(Member m:listOfMembers)
+        {
+            if(m.getName().equals(member.getName())){
+                denominator = denominator + m.getRatio();
+                listOfMembers[i].setRatio(denominator);
             }
             i++;
         }
+
+        i=0;
+        for(Member m:listOfMembers)
+        {
+            if(m.getName().equals(member.getName()))
+            {
+                double ratio = m.getRatio();
+                listOfMembers[i].setFinalShare(1/ratio);
+            }
+            i++;
+        }
+
+
     }
 
     public void showVotes()
     {
         System.out.println("The point allocation based on votes is: ");
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
         for(int i=0; i<listOfMembers.length; i++) 
         {
-            System.out.println(listOfMembers[i].getName()+ " : " + listOfMembers[i].getVote());
+            System.out.println(listOfMembers[i].getName()+ " : " + twoDForm.format(listOfMembers[i].getFinalShare()));
         }
 
     }

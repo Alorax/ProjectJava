@@ -14,9 +14,9 @@ class Project implements Serializable
     private String[] namesOfTeamMembers;
     private int numberOfTeamMembers;
 
-//----------------------------------------------------------------
-// Stores the information from each Project
-//----------------------------------------------------------------
+    //----------------------------------------------------------------
+    // Storing the information from each Project
+    //----------------------------------------------------------------
 
     public Project (String aName, int aNumberOfTeamMembers, String[] theNamesOfTeamMembers)
     {
@@ -62,24 +62,19 @@ class Project implements Serializable
         this.numberOfTeamMembers = numberOfTeamMembers;
     }
 
-    public String getName() 
-    {
+    public String getName() {
         return name;
     }
 
-    public String[] getNamesOfTeamMembers() 
-    {
+    public String[] getNamesOfTeamMembers() {
         return namesOfTeamMembers;
     }
 
-    public int getNumberOfTeamMembers() 
-    {
+    public int getNumberOfTeamMembers() {
         return numberOfTeamMembers;
     }
 
-
-    public String printNamesOfTeamMembers(String[] namesOfTeamMembers) 
-    {
+    public String printNamesOfTeamMembers(String[] namesOfTeamMembers) {
         String names=null;
         if(namesOfTeamMembers !=  null)
             names = namesOfTeamMembers[0];
@@ -91,8 +86,7 @@ class Project implements Serializable
         return names;
     }
     @Override
-    public String toString() 
-    {
+    public String toString() {
         return  name + " , " + numberOfTeamMembers +" , " + printNamesOfTeamMembers(namesOfTeamMembers);
 
     }
