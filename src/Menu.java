@@ -298,6 +298,28 @@ class Menu {
                 displayMenu();
             }
         }
+
+    public void showProjectPointAllocation(){
+        ArrayList<VotesAllocation> votesAllocationList = new ArrayList<VotesAllocation>();
+        if(listOfProjectsAndVotesFromFile != null)
+            votesAllocationList=listOfProjectsAndVotesFromFile;
+        if(listOfProjectsAndVotes != null)
+            votesAllocationList.addAll(listOfProjectsAndVotes);
+        if(votesAllocationList == null)
+            System.out.println("There are 0 projects.");
+        else {
+            //   for(VotesAllocation votesAllocation:votesAllocationList)
+            //     System.out.println(votesAllocation.toString());
+            ProjectPointAllocation projectPointAllocation = new ProjectPointAllocation(votesAllocationList);
+            projectPointAllocation.showProjectPointAllocation();
+        }
+        System.out.print("\n\tPress any key to return to the Main Menu: ");
+        if (scan.next() != null) {
+            displayMenu();
+        }
+
+    }
+
 //-----------------------------------------------------------------------------------
 //   Menu Selection 
 //-----------------------------------------------------------------------------------
@@ -344,17 +366,12 @@ class Menu {
         data.writeData();
     }
 
-    public void showProjectPointAllocation(){
-        System.out.println("Informations about Project");
-        System.out.print("\n\tPress any key to return to the Main Menu: ");
-        if (scan.next() != null) {
-            displayMenu();
-        }
+
 //-----------------------------------------------------------------------------------
 //   Reads the file containing the team information and votes
 //-----------------------------------------------------------------------------------
-    }
-    public void readDataFromFile() {
+    public void readDataFromFile()
+    {
         StoreData data = new StoreData(fileName);
         listOfProjectsAndVotesFromFile = data.readData();
     }
