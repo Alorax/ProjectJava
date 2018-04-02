@@ -1,62 +1,54 @@
 //----------------------------------------------------------------
 // Stores the information for each member
 //----------------------------------------------------------------
-public class Member 
-{
+public class Member {
+
     private String name;
     private int vote;
     private double ratio;
     private double finalShare;
 
-    public Member(String name, int vote) 
-    {
+    public Member(String name, int vote) {
         this.name = name;
         this.vote = vote;
-        this.ratio = 1.0D;
+        this.ratio = 1;
+
     }
 
-    public String getName() 
-    {
-        return this.name;
+    public String getName() {
+        return name;
     }
 
-    public void setName(String name) 
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getVote() 
-    {
-        return this.vote;
+    public int getVote() {
+        return vote;
     }
 
-    public void setVote(int vote) 
-    {
+    public void setVote(int vote) {
         this.vote = vote;
     }
 
-    public double getRatio() 
-    {
-        return this.ratio;
+    public double getRatio() {
+        return ratio;
     }
 
-    public void setRatio(double ratio) 
-    {
+    public void setRatio(double ratio) {
         this.ratio = ratio;
     }
 
-    public double getFinalShare() 
-    {
-        return this.finalShare;
+    public double getFinalShare() {
+        return finalShare;
     }
 
-    public void setFinalShare(double finalShare) 
-    {
+    public void setFinalShare(double finalShare) {
         this.finalShare = finalShare;
     }
 
-    public String toString() 
-    {
-        return this.name + " , " + this.vote;
+    @Override
+    public String toString() {
+        return name + " , " + vote;
     }
 }
