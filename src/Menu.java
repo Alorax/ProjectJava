@@ -5,7 +5,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Menu {
+class Menu 
+{
     ArrayList<Project> ProjectList = new ArrayList<Project>();
     ArrayList<VotesAllocation> listOfProjectsAndVotes = new ArrayList<>();
     ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile = new ArrayList<>();
@@ -14,7 +15,8 @@ class Menu {
     private static String fileName = "NewProject.txt";
 
 
-    public void displayMenu() {
+    public void displayMenu() 
+    {
         System.out.println("\nWelcome to Split-It");
         System.out.println("\n\tAbout (A)");
         System.out.println("\tCreate Project (C)");
@@ -32,18 +34,21 @@ class Menu {
 ------------------------------------------------------------------------------------
 */
 
-    private void about() {
+    private void about() 
+    {
         System.out.println("\n\tThis is a program designed to allocate credit fairly" +
                 " for a project, based on each team member's contributions.");
         System.out.print("\tPress any key to return to the Main Menu: ");
 
-        if (scan.next() != null) {
+        if (scan.next() != null) 
+        {
             displayMenu();
         }
     }
 
 
-    private void newProject() {
+    private void newProject()
+    {
         Project p = createProject();
         ProjectList.add(p);
         System.out.print("\n\tPress any key to return to the Main Menu: ");
@@ -64,17 +69,20 @@ class Menu {
     }
 
 
-    public String getName() {
+    public String getName() 
+    {
         String projectName = new String();
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
 
-        while (valid == false) {
+        while (valid == false) 
+        {
             System.out.print("\nEnter the project name: ");
 
             projectName = scan.nextLine();
 
-            if (!Project.checkName(projectName)) {
+            if (!Project.checkName(projectName))
+            {
                 System.out.println("\nInvalid input, try again.");
             } else {
                 if (checkIfProjectExists(projectName))
@@ -86,30 +94,37 @@ class Menu {
         return projectName;
     }
 
-    public boolean checkIfProjectExists(String name) {
-        if (searchProject(name) != null) {
+    public boolean checkIfProjectExists(String name) 
+    {
+        if (searchProject(name) != null) 
+        {
             return true;
         }
 
         return false;
     }
 
-    public int getNumberofTeamMembers() {
+    public int getNumberofTeamMembers() 
+    {
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
         String n;
         int numberOfMembers = 0;
 
-        while (valid == false) {
+        while (valid == false) 
+        {
             System.out.print("\nEnter the number of team members: ");
 
             n = scan.next();
             Tester test = new Tester();
-            if (test.isNumber(n)) {
+            if (test.isNumber(n)) 
+            {
                 numberOfMembers = Integer.parseInt(n);
-                if (Project.checkNumberOfMembers(numberOfMembers)) {
+                if (Project.checkNumberOfMembers(numberOfMembers)) 
+                {
                     valid = true;
-                } else {
+                } else 
+                {
                     System.out.println("\nProjects can have between " +
                             Project.MINMEMBERS + " and " +
                             Project.MAXMEMBERS + " members, try again.");
@@ -120,8 +135,10 @@ class Menu {
         return numberOfMembers;
     }
 
-    public boolean checkIfMemberExists(String name, String[] namesOfTeamMembers) {
-        if (namesOfTeamMembers != null) {
+    public boolean checkIfMemberExists(String name, String[] namesOfTeamMembers) 
+    {
+        if (namesOfTeamMembers != null) 
+        {
             for (int i = 0; i < namesOfTeamMembers.length; i++)
                 if (name.equals(namesOfTeamMembers[i]))
                     return true;
@@ -129,23 +146,28 @@ class Menu {
         return false;
     }
 
-    public String[] getNamesOfTeamMembers(int numberOfParticipants) {
-
+    public String[] getNamesOfTeamMembers(int numberOfParticipants) 
+    {
         Scanner scan = new Scanner(System.in);
         boolean valid = false;
 
         String[] names = new String[Project.MAXMEMBERS];
 
-        for (int i = 0; i < numberOfParticipants; i++) {
+        for (int i = 0; i < numberOfParticipants; i++) 
+        {
             valid = false;
-            while (valid == false) {
+            while (valid == false) 
+            {
                 System.out.print("\nEnter team member's name: ");
                 String name = scan.nextLine();
-                if (!checkIfMemberExists(name, names)) {
-                    if (Project.checkName(name)) {
+                if (!checkIfMemberExists(name, names)) 
+                {
+                    if (Project.checkName(name)) 
+                    {
                         valid = true;
                         names[i] = name;
-                    } else {
+                    } else 
+                    {
                         System.out.println("\nA name must contain only alphanumeric characters and be between " +
                                 Project.MINNAMELENGTH + " and " + Project.MAXNAMELENGTH +
                                 " characters, try again.");
@@ -158,11 +180,14 @@ class Menu {
         return names;
     }
 
-    public Project searchProjectInFile(String nameOfProject) {
+    public Project searchProjectInFile(String nameOfProject) 
+    {
         int found = 0;
         Project p = null;
-        for (VotesAllocation votesAllocation : listOfProjectsAndVotesFromFile) {
-            if (votesAllocation.getProject().getName().equals(nameOfProject)) {
+        for (VotesAllocation votesAllocation : listOfProjectsAndVotesFromFile) 
+        {
+            if (votesAllocation.getProject().getName().equals(nameOfProject)) 
+            {
                 found = 1;
                 p = votesAllocation.getProject();
                 break;
@@ -171,13 +196,16 @@ class Menu {
         return p;
     }
 
-    public Project searchProject(String nameOfProject) {
+    public Project searchProject(String nameOfProject) 
+    {
         int found = 0;
         Project p = null;
         p = searchProjectInFile(nameOfProject);
         if (p == null) {
-            for (int index = 0; index < ProjectList.size(); index++) {
-                if (ProjectList.get(index).getName().equals(nameOfProject)) {
+            for (int index = 0; index < ProjectList.size(); index++) '
+            {
+                if (ProjectList.get(index).getName().equals(nameOfProject)) 
+                {
                     found = 1;
                     p = ProjectList.get(index);
                     break;
@@ -187,12 +215,15 @@ class Menu {
         return p;
     }
 
-    public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject) {
+    public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject) 
+    {
         int found = 0;
         VotesAllocation votesAllocation = null;
 
-        for (VotesAllocation v : listOfProjectsAndVotesFromFile) {
-            if (v.getProject().getName().equals(nameOfProject)) {
+        for (VotesAllocation v : listOfProjectsAndVotesFromFile) 
+        {
+            if (v.getProject().getName().equals(nameOfProject)) 
+            {
                 found = 1;
                 votesAllocation = v;
                 break;
@@ -201,13 +232,17 @@ class Menu {
         return votesAllocation;
     }
 
-    public VotesAllocation searchAllocatedVotesProject(String nameOfProject) {
+    public VotesAllocation searchAllocatedVotesProject(String nameOfProject) 
+    {
         int found = 0;
         VotesAllocation v = null;
         v = searchAllocatedVotesProjectInFile(nameOfProject);
-        if (v == null) {
-            for (int index = 0; index < listOfProjectsAndVotesFromFile.size(); index++) {
-                if (listOfProjectsAndVotesFromFile.get(index).getProject().getName().equals(nameOfProject)) {
+        if (v == null) 
+        {
+            for (int index = 0; index < listOfProjectsAndVotesFromFile.size(); index++) 
+            {
+                if (listOfProjectsAndVotesFromFile.get(index).getProject().getName().equals(nameOfProject)) 
+                {
                     found = 1;
                     v = listOfProjectsAndVotesFromFile.get(index);
                     break;
@@ -217,7 +252,8 @@ class Menu {
         return v;
     }
 
-    public void enterVotes() {
+    public void enterVotes() 
+    {
         int found = 0;
         Project p = null;
         System.out.print("\nEnter the project name: ");
@@ -225,17 +261,21 @@ class Menu {
 
         p = searchProject(nameOfProject);
 
-        if (p == null) {
+        if (p == null)
+        {
             System.out.println("\nThe project with name " + nameOfProject + " was not found. Try again!");
             enterVotes();
         }
 
-        if (p != null) {
+        if (p != null) 
+        {
             System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
             {
                 VotesAllocation vFound = searchAllocatedVotesProject(nameOfProject);
-                if (vFound != null) {
-                    if (vFound.getList() != null) {
+                if (vFound != null)
+                {
+                    if (vFound.getList() != null) 
+                    {
                         System.out.println("This projects has votes allocated already! Try again!");
                         enterVotes();
                     }
@@ -286,7 +326,6 @@ class Menu {
         storeInformation(listOfProjectsAndVotes);
         System.exit(0);
     }
-    //-----------------------------------------------------------
 
     //-------------------------------------------------------------
     //  Store Project
