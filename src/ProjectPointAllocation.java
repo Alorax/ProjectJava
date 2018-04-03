@@ -63,9 +63,19 @@ public class ProjectPointAllocation
         }
         if (p != null) // if project exists
         {
-            System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
-            calculateRatios(p);
-            showVotes();
+            int numberOfTeamMembers = p.getNumberOfTeamMembers();
+            if (numberOfTeamMembers == 3)
+            {
+                System.out.println("There are " + p.getNumberOfTeamMembers() + " members in the team called " + p.getName() + ".");
+                calculateRatios(p);
+                showVotes();
+            }
+            else
+            {
+                System.out.println("There are " + p.getNumberOfTeamMembers() + " members in the team called " + "\"" + p.getName()+"\"" + ". Right now our formula only supports teams of 3 members.");
+                System.out.println("We are sorry for this. Press N to try again with a different team, R to return to main menu or Q to quit: \"");
+                chooseShowProject_TryAgain90();
+            }
         }
     }
 
