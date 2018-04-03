@@ -4,34 +4,35 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProjectPointAllocation {
-
-
+public class ProjectPointAllocation 
+{
     private ArrayList<VotesAllocation> votesAllocationList;
     private Menu menu= new Menu();
     private Member[] listOfMembers;
     private Scanner scan = new Scanner(System.in);
     private char option;
 
-    public ProjectPointAllocation(ArrayList<VotesAllocation> votesAllocationList){
-
+    public ProjectPointAllocation(ArrayList<VotesAllocation> votesAllocationList)
+    {
         this.votesAllocationList= votesAllocationList;
-
     }
 
-    public void setListOfMembers(Project p){
-
+    public void setListOfMembers(Project p)
+    {
         Member[] listOfMembers = new Member[p.getNumberOfTeamMembers()];
-        for(int i = 0; i< listOfMembers.length;i++){
+        for(int i = 0; i< listOfMembers.length;i++)
+        {
             listOfMembers[i] = new Member(p.getNamesOfTeamMembers()[i],0);
         }
         this.listOfMembers = listOfMembers;
     }
 
-    public Project  searchInProject(String name){
+    public Project  searchInProject(String name)
+    {
         Project p = null;
         for(VotesAllocation votesAllocation:votesAllocationList)
-            if(votesAllocation.getProject().getName().equals(name)){
+            if(votesAllocation.getProject().getName().equals(name))
+            {
                 p = votesAllocation.getProject();
                 break;
             }
@@ -40,19 +41,22 @@ public class ProjectPointAllocation {
 
     }
 
-    public void showProjectPointAllocation() {
+    public void showProjectPointAllocation() 
+    {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("\nEnter project name: ");
         String nameOfProject = scan.next();
         Project p = searchInProject(nameOfProject);
 
-        if (p == null) {
+        if (p == null) 
+        {
             System.out.println("The project " + nameOfProject + " doesn't exist.Press N to try again, R to return to main menu or Q to quit: ");
             chooseShowProject_TryAgain90();
 
         }
-        if (p != null) {
+        if (p != null) 
+        {
             System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
             calculatePointsAllocation(p);
             showVotes();
@@ -80,22 +84,22 @@ public class ProjectPointAllocation {
 
     }
 
-    public void calculatePointsAllocation(Project p) {
+    public void calculatePointsAllocation(Project p) 
+    {
         Tester test = new Tester();
         this.setListOfMembers(p);
 
-        for (VotesAllocation votesAllocation : votesAllocationList) {
-            if (votesAllocation.getProject().equals(p)) {
-
+        for (VotesAllocation votesAllocation : votesAllocationList) 
+        {
+            if (votesAllocation.getProject().equals(p)) 
+            {
                 ArrayList<Vote> list = votesAllocation.getList();
 
-                for(Vote v : list) {
-                 //   System.out.println(v.toString());
+                for(Vote v : list) 
+                {
                     ArrayList<Member> listOfMemberAndVotes = v.getListOfMembersAndVotes();
-                   // System.out.println(listOfMemberAndVotes.toString());
-                    for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2) {
-                        //for(Member member: listOfMemberAndVotes) {
-
+                    for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2) 
+                    {
                         pointAllocationOfMember(listOfMemberAndVotes.get(i),listOfMemberAndVotes.get(i).getVote() / (double)listOfMemberAndVotes.get(i + 1).getVote());
                         pointAllocationOfMember(listOfMemberAndVotes.get(i+1),listOfMemberAndVotes.get(i+1).getVote() / (double)listOfMemberAndVotes.get(i).getVote());
                     }
@@ -106,11 +110,13 @@ public class ProjectPointAllocation {
         }
     }
 
-    public void pointAllocationOfMember(Member member,double r){
+    public void pointAllocationOfMember(Member member,double r)
+    {
         int i = 0;
         double ratio = r;
         for(Member m:listOfMembers){
-            if(m.getName().equals(member.getName())){
+            if(m.getName().equals(member.getName()))
+            {
                 ratio = ratio + m.getRatio();
                 listOfMembers[i].setRatio(ratio);
             }
@@ -118,8 +124,10 @@ public class ProjectPointAllocation {
         }
 
         i=0;
-        for(Member m:listOfMembers){
-            if(m.getName().equals(member.getName())){
+        for(Member m:listOfMembers)
+        {
+            if(m.getName().equals(member.getName()))
+            {
                 ratio = m.getRatio();
                 listOfMembers[i].setFinalShare(1/ratio);
             }
@@ -129,10 +137,12 @@ public class ProjectPointAllocation {
 
     }
 
-    public void showVotes(){
+    public void showVotes()
+    {
         System.out.println("The point allocation based on votes is: ");
         DecimalFormat twoDForm = new DecimalFormat("#.##");
-        for(int i=0; i<listOfMembers.length; i++) {
+        for(int i=0; i<listOfMembers.length; i++) 
+        {
             System.out.println(listOfMembers[i].getName()+ " : " + twoDForm.format(listOfMembers[i].getFinalShare()));
         }
 
