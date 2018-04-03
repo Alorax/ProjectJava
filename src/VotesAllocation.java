@@ -46,7 +46,11 @@ public class VotesAllocation
     public String toString()
     {
         return project.toString() + " , " +printListOfMembersVotes();
-    }
+    } 
+
+//--------------------------------------------------------------------------------------------------------------
+// Get votes for each member
+//-------------------------------------------------------------------------------------------------------------- 
     public void getVotes()
     {
         list = new ArrayList<>();
@@ -60,10 +64,11 @@ public class VotesAllocation
             Vote v = new Vote (project.getNamesOfTeamMembers()[i],listOfMembersVotes);
             list.add(v);
         }
+ }
 
-        }
-
-
+//--------------------------------------------------------------------------------------------------------------
+// Add votes in a list to be stored and check if sum of votes is equal to 100
+//-------------------------------------------------------------------------------------------------------------- 
     public ArrayList<Member>  giveVotes(int i,int numberOfMembers)
     {
         ArrayList<Member> listOfMembersVotes = new ArrayList<>();
@@ -86,7 +91,9 @@ public class VotesAllocation
         }
      return listOfMembersVotes;
     }
-
+//--------------------------------------------------------------------------------------------------------------
+// Validate votes
+//-------------------------------------------------------------------------------------------------------------- 
     public int readAndCheckVote(int i,int j)
     {
         int vote = 0 ;
