@@ -14,9 +14,9 @@ class Project implements Serializable
     private String[] namesOfTeamMembers;
     private int numberOfTeamMembers;
 
-    //----------------------------------------------------------------
-    // Storing the information from each Project
-    //----------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
+// Stores information for each project
+//--------------------------------------------------------------------------------------------------------------
 
     public Project (String aName, int aNumberOfTeamMembers, String[] theNamesOfTeamMembers)
     {
@@ -98,9 +98,10 @@ class Project implements Serializable
     }
 
 
-    //---------------------------------------------
-    // display an error if input is wrong
-    //--------------------------------------------
+ 
+//--------------------------------------------------------------------------------------------------------------
+// Display error if input is wrong
+//--------------------------------------------------------------------------------------------------------------
     public void fatalError(String errorMessage)
     {
         System.out.println("Fatal error: " + errorMessage);
@@ -108,9 +109,10 @@ class Project implements Serializable
         System.exit(1);
     }
 
-    //----------------------------------------------
-    // this vaildates all kinds of user input
-    //----------------------------------------------
+
+//--------------------------------------------------------------------------------------------------------------
+// Different methods to validate user input
+//--------------------------------------------------------------------------------------------------------------
 
     public static boolean checkName(String theName)
     {
@@ -130,17 +132,19 @@ class Project implements Serializable
 
         return nameOK;
     }
-//---------------------------------------------------
-// validate numberof members
-//-----------------------------------------------
+
+//--------------------------------------------------------------------------------------------------------------
+// validate number of members
+//--------------------------------------------------------------------------------------------------------------
 
     static boolean checkNumberOfMembers(int theNumberOfMembers)
     {
         return (theNumberOfMembers >= MINMEMBERS && theNumberOfMembers <= MAXMEMBERS);
     }
-    //--------------------------------------------
-    // validate the team
-    //--------------------------------------------
+
+//--------------------------------------------------------------------------------------------------------------
+// Validates the team
+//--------------------------------------------------------------------------------------------------------------
 
     private boolean checkTheTeam(String[] theTeam, int theNumberOfParticipants)
     {
@@ -157,6 +161,11 @@ class Project implements Serializable
         }
         return TeamOK;
     }
+    
+
+//--------------------------------------------------------------------------------------------------------------
+// Search the project in the File
+//--------------------------------------------------------------------------------------------------------------
     public Project searchProjectInFile( String nameOfProject,ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile)
     {
         int found = 0;
@@ -173,6 +182,8 @@ class Project implements Serializable
         }
         return p;
     }
+    
+
     public Project searchProject(String nameOfProject,ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile,
                                  ArrayList<Project> ProjectList)
     {
