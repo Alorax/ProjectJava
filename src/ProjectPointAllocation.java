@@ -26,7 +26,6 @@ public class ProjectPointAllocation
         }
         this.listOfMembers = listOfMembers;
     }
-
 //--------------------------------------------------------------------------------------------------------------
 // Check if the project exists
 //--------------------------------------------------------------------------------------------------------------
@@ -40,7 +39,7 @@ public class ProjectPointAllocation
                 break;
             }
 
-            return p;
+        return p;
 
     }
 
@@ -65,12 +64,12 @@ public class ProjectPointAllocation
         if (p != null) // if project exists
         {
             System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
-            calculatePointsAllocation(p);
+            calculateRatios(p);
             showVotes();
         }
     }
 
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Give user more options if the project is not found or doesn't have nay allocated votes
 //--------------------------------------------------------------------------------------------------------------
     private int chooseShowProject_TryAgain90()
@@ -94,10 +93,10 @@ public class ProjectPointAllocation
 
     }
 
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Calculate point allocation
 //--------------------------------------------------------------------------------------------------------------
-    public void calculatePointsAllocation(Project p)
+    public void calculateRatios(Project p)
     {
         Tester test = new Tester();
         this.setListOfMembers(p);
@@ -114,7 +113,7 @@ public class ProjectPointAllocation
                     for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2)
                     {//calculate ratio for each member when another member gives a vote
                         pointAllocationOfMember(listOfMemberAndVotes.get(i),listOfMemberAndVotes.get(i).getVote() / (double)listOfMemberAndVotes.get(i + 1).getVote());
-                        
+
                         pointAllocationOfMember(listOfMemberAndVotes.get(i+1),listOfMemberAndVotes.get(i+1).getVote() / (double)listOfMemberAndVotes.get(i).getVote());
                     }
 
@@ -135,7 +134,7 @@ public class ProjectPointAllocation
         for(Member m:listOfMembers){
             if(m.getName().equals(member.getName())) // calculate denominator
             {
-                denominator = denominator + m.getRatio(); 
+                denominator = denominator + m.getRatio();
                 listOfMembers[i].setRatio(denominator);
             }
             i++;
@@ -154,7 +153,7 @@ public class ProjectPointAllocation
 
 
     }
-    
+
 //--------------------------------------------------------------------------------------------------------------
 // Show pint allocation based on votes
 //--------------------------------------------------------------------------------------------------------------
