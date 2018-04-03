@@ -27,6 +27,9 @@ public class ProjectPointAllocation
         this.listOfMembers = listOfMembers;
     }
 
+//--------------------------------------------------------------------------------------------------------------
+// Check if the project exists
+//--------------------------------------------------------------------------------------------------------------
     public Project  searchInProject(String name)
     {
         Project p = null;
@@ -41,6 +44,10 @@ public class ProjectPointAllocation
 
     }
 
+//--------------------------------------------------------------------------------------------------------------
+// Ask user to input name of team and show point allocation
+//--------------------------------------------------------------------------------------------------------------
+
     public void showProjectPointAllocation()
     {
         Scanner scan = new Scanner(System.in);
@@ -49,13 +56,13 @@ public class ProjectPointAllocation
         String nameOfProject = scan.next();
         Project p = searchInProject(nameOfProject);
 
-        if (p == null)
+        if (p == null) // if project doesn't exist
         {
             System.out.println("The project " + nameOfProject + " doesn't exist.Press N to try again, R to return to main menu or Q to quit: ");
             chooseShowProject_TryAgain90();
 
         }
-        if (p != null)
+        if (p != null) // if project exists
         {
             System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
             calculatePointsAllocation(p);
@@ -63,6 +70,9 @@ public class ProjectPointAllocation
         }
     }
 
+//--------------------------------------------------------------------------------------------------------------
+// Give user more options if the project is not found or doesn't have nay allocated votes
+//--------------------------------------------------------------------------------------------------------------
     private int chooseShowProject_TryAgain90()
     {
         char userInput = scan.next().charAt(0);
@@ -84,6 +94,9 @@ public class ProjectPointAllocation
 
     }
 
+//--------------------------------------------------------------------------------------------------------------
+// Calculate point allocation
+//--------------------------------------------------------------------------------------------------------------
     public void calculatePointsAllocation(Project p)
     {
         Tester test = new Tester();
@@ -99,8 +112,9 @@ public class ProjectPointAllocation
                 {
                     ArrayList<Member> listOfMemberAndVotes = v.getListOfMembersAndVotes();
                     for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2)
-                    {
+                    {//calculate ratio for each member when another member gives a vote
                         pointAllocationOfMember(listOfMemberAndVotes.get(i),listOfMemberAndVotes.get(i).getVote() / (double)listOfMemberAndVotes.get(i + 1).getVote());
+                        
                         pointAllocationOfMember(listOfMemberAndVotes.get(i+1),listOfMemberAndVotes.get(i+1).getVote() / (double)listOfMemberAndVotes.get(i).getVote());
                     }
 
@@ -110,14 +124,18 @@ public class ProjectPointAllocation
         }
     }
 
+//--------------------------------------------------------------------------------------------------------------
+// Calculate final share for each member
+//--------------------------------------------------------------------------------------------------------------
+
     public void pointAllocationOfMember(Member member,double r)
     {
         int i = 0;
         double denominator = r;
         for(Member m:listOfMembers){
-            if(m.getName().equals(member.getName()))
+            if(m.getName().equals(member.getName())) // calculate denominator
             {
-                denominator = denominator + m.getRatio();
+                denominator = denominator + m.getRatio(); 
                 listOfMembers[i].setRatio(denominator);
             }
             i++;
@@ -126,7 +144,7 @@ public class ProjectPointAllocation
         i=0;
         for(Member m:listOfMembers)
         {
-            if(m.getName().equals(member.getName()))
+            if(m.getName().equals(member.getName())) // calculate the actual ratio
             {
                 denominator = m.getRatio();
                 listOfMembers[i].setFinalShare(1/denominator);
@@ -136,6 +154,10 @@ public class ProjectPointAllocation
 
 
     }
+    
+//--------------------------------------------------------------------------------------------------------------
+// Show pint allocation based on votes
+//--------------------------------------------------------------------------------------------------------------
 
     public void showVotes()
     {
