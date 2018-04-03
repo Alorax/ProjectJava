@@ -1,33 +1,38 @@
 import java.util.ArrayList;
 
-public class Vote {
+public class Vote
+{
+    private String member;
+    private ArrayList<Member> listOfMembersAndVotes ;
 
-   private String member;
-
-   private ArrayList<Member> listOfMembersAndVotes ;
-
-    public Vote(String member,ArrayList<Member> listOfMembersAndVotes) {
+    public Vote(String member,ArrayList<Member> listOfMembersAndVotes)
+    {
         this.member =member;
         this.listOfMembersAndVotes = listOfMembersAndVotes;
     }
 
-    public String getMember() {
+    public String getMember()
+    {
         return member;
     }
 
-    public void setMember(String member) {
+    public void setMember(String member)
+    {
         this.member = member;
     }
 
-    public ArrayList<Member> getListOfMembersAndVotes() {
+    public ArrayList<Member> getListOfMembersAndVotes()
+    {
         return listOfMembersAndVotes;
     }
 
-    public void setListOfMembersAndVotes(ArrayList<Member> listOfMembersAndVotes) {
+    public void setListOfMembersAndVotes(ArrayList<Member> listOfMembersAndVotes)
+    {
         this.listOfMembersAndVotes = listOfMembersAndVotes;
     }
 
-    public String  printListOfMemberAndVotes(){
+    public String  printListOfMemberAndVotes()
+    {
         String list = null;
 
         if(listOfMembersAndVotes != null)
@@ -40,7 +45,8 @@ public class Vote {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return  member + " , " + printListOfMemberAndVotes();
     }
 }
