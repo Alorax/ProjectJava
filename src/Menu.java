@@ -9,8 +9,19 @@ class Menu
     private char option;
     private Scanner scan = new Scanner(System.in);
     private static String fileName = "NewProject.txt";
+    
+//--------------------------------------------------------------------------------------------------------------
+// Read Data from file before the menu is displayed
+//--------------------------------------------------------------------------------------------------------------
+    public void readDataFromFile()
+    {
+        StoreData data = new StoreData(fileName);
+        listOfProjectsAndVotesFromFile = data.readData();
+    }
 
-
+//--------------------------------------------------------------------------------------------------------------
+// Display menu text
+//--------------------------------------------------------------------------------------------------------------
     public void displayMenu()
     {
         System.out.println("\nWelcome to Split-It");
@@ -23,12 +34,39 @@ class Menu
 
         choose();
     }
+//--------------------------------------------------------------------------------------------------------------
+// Allow user to choose their option 
+//--------------------------------------------------------------------------------------------------------------
 
-/*
-------------------------------------------------------------------------------------
-    'About' page for when user chooses option 'A' from Main Menu.
-------------------------------------------------------------------------------------
-*/
+    public int choose()
+    {
+        char userInput = scan.next().charAt(0);
+        option = Character.toLowerCase(userInput); //enables the user to input either lowercase or uppercase characters.
+        switch (option)
+        {
+            case 'a':
+                about();
+            case 'c':
+                newProject();
+            case 'v':
+                enterVotes();
+            case 's':
+                showProjectPointAllocation();
+            case 'q':
+                quit();
+            default:
+                {
+                System.out.println("Please choose another option: ");
+                choose();
+                }
+        }
+
+        return 0;
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+// About option
+//--------------------------------------------------------------------------------------------------------------
 
     private void about()
     {
@@ -41,7 +79,9 @@ class Menu
             displayMenu();
         }
     }
-
+//--------------------------------------------------------------------------------------------------------------
+// Allow user to create a new project
+//--------------------------------------------------------------------------------------------------------------
 
     private void newProject()
     {
@@ -64,7 +104,9 @@ class Menu
 
         return p;
     }
-
+//--------------------------------------------------------------------------------------------------------------
+// Get name of project and check if the name already exists
+//--------------------------------------------------------------------------------------------------------------
 
     public String getName()
     {
@@ -101,7 +143,9 @@ class Menu
 
         return false;
     }
-
+//--------------------------------------------------------------------------------------------------------------
+// Get the number of team members and validate it
+//--------------------------------------------------------------------------------------------------------------
     public int getNumberofTeamMembers()
     {
         Scanner scan = new Scanner(System.in);
@@ -131,7 +175,9 @@ class Menu
         }
         return numberOfMembers;
     }
-
+//--------------------------------------------------------------------------------------------------------------
+// Get names of team members and validate them
+//--------------------------------------------------------------------------------------------------------------
     public boolean checkIfMemberExists(String name, String[] namesOfTeamMembers)
     {
         if (namesOfTeamMembers != null)
@@ -176,79 +222,9 @@ class Menu
         }
         return names;
     }
-
-    public Project searchProjectInFile(String nameOfProject)
-    {
-        int found = 0;
-        Project p = null;
-
-        for (VotesAllocation votesAllocation : listOfProjectsAndVotesFromFile)
-        {
-            if (votesAllocation.getProject().getName().equals(nameOfProject))
-            {
-                found = 1;
-                p = votesAllocation.getProject();
-                break;
-            }
-        }
-        return p;
-    }
-
-    public Project searchProject(String nameOfProject)
-    {
-        int found = 0;
-        Project p = null;
-        p = searchProjectInFile(nameOfProject);
-        if (p == null)
-        {
-            for (int index = 0; index < ProjectList.size(); index++)
-            {
-                if (ProjectList.get(index).getName().equals(nameOfProject))
-                {
-                    found = 1;
-                    p = ProjectList.get(index);
-                    break;
-                }
-            }
-        }
-        return p;
-    }
-
-    public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject)
-    {
-        int found = 0;
-        VotesAllocation votesAllocation = null;
-
-        for (VotesAllocation v : listOfProjectsAndVotesFromFile)
-        {
-            if (v.getProject().getName().equals(nameOfProject))
-            {
-                found = 1;
-                votesAllocation = v;
-                break;
-            }
-        }
-        return votesAllocation;
-    }
-
-    public VotesAllocation  searchAllocatedVotesProject(String nameOfProject)
-    {
-        int found = 0;
-        VotesAllocation v = null;
-        v = searchAllocatedVotesProjectInFile(nameOfProject);
-        if(v == null) {
-            for (int index = 0; index < listOfProjectsAndVotesFromFile.size(); index++)
-            {
-                if (listOfProjectsAndVotesFromFile.get(index).getProject().getName().equals(nameOfProject))
-                {
-                    found = 1;
-                    v= listOfProjectsAndVotesFromFile.get(index);
-                    break;
-                }
-            }
-        }
-        return v;
-    }
+//--------------------------------------------------------------------------------------------------------------
+// Allow user to enter votes
+//--------------------------------------------------------------------------------------------------------------
 
     public void enterVotes()
     {
@@ -287,6 +263,10 @@ class Menu
             displayMenu();
         }
 }
+    
+//--------------------------------------------------------------------------------------------------------------
+// Give user other opotions if the project is not found
+//--------------------------------------------------------------------------------------------------------------
     private int chooseProject_TryAgain()
     {
         char userInput = scan.next().charAt(0);
@@ -306,49 +286,87 @@ class Menu
         return 0;
     }
 
-    public int choose()
+//--------------------------------------------------------------------------------------------------------------
+// Search if project is stored in the data file
+//--------------------------------------------------------------------------------------------------------------
+    public Project searchProjectInFile(String nameOfProject)
     {
-        char userInput = scan.next().charAt(0);
-        option = Character.toLowerCase(userInput); //enables the user to input either lowercase or uppercase characters.
-        switch (option)
+        int found = 0;
+        Project p = null;
+
+        for (VotesAllocation votesAllocation : listOfProjectsAndVotesFromFile)
         {
-            case 'a':
-                about();
-            case 'c':
-                newProject();
-            case 'v':
-                enterVotes();
-            case 's':
-                showProjectPointAllocation();
-            case 'q':
-                quit();
-            default:
-                {
-                System.out.println("Please choose another option: ");
-                choose();
-                }
+            if (votesAllocation.getProject().getName().equals(nameOfProject))
+            {
+                found = 1;
+                p = votesAllocation.getProject();
+                break;
+            }
         }
+        return p;
+    }
 
-        return 0;
-    }
-    //------------------------------------------------------------
-    // QUIT - when user quits the project is stored in a text file
-    public void quit()
+    public Project searchProject(String nameOfProject)
     {
-        storeInformation(listOfProjectsAndVotes);
-        System.exit(0);
+        int found = 0;
+        Project p = null;
+        p = searchProjectInFile(nameOfProject);
+        if (p == null)
+        {
+            for (int index = 0; index < ProjectList.size(); index++)
+            {
+                if (ProjectList.get(index).getName().equals(nameOfProject))
+                {
+                    found = 1;
+                    p = ProjectList.get(index);
+                    break;
+                }
+            }
+        }
+        return p;
     }
-    //-----------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
+// Check if the project has allocated votes
+//--------------------------------------------------------------------------------------------------------------
+    public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject)
+    {
+        int found = 0;
+        VotesAllocation votesAllocation = null;
 
-    //-------------------------------------------------------------
-    //  Store Project
-    //------------------------------------------------------------
-    public void storeInformation(ArrayList<VotesAllocation> v)
-    {
-       // System.out.println(v.toString());
-        StoreData data = new StoreData(v,fileName);
-        data.writeData();
+        for (VotesAllocation v : listOfProjectsAndVotesFromFile)
+        {
+            if (v.getProject().getName().equals(nameOfProject))
+            {
+                found = 1;
+                votesAllocation = v;
+                break;
+            }
+        }
+        return votesAllocation;
     }
+
+    public VotesAllocation  searchAllocatedVotesProject(String nameOfProject)
+    {
+        int found = 0;
+        VotesAllocation v = null;
+        v = searchAllocatedVotesProjectInFile(nameOfProject);
+        if(v == null) {
+            for (int index = 0; index < listOfProjectsAndVotesFromFile.size(); index++)
+            {
+                if (listOfProjectsAndVotesFromFile.get(index).getProject().getName().equals(nameOfProject))
+                {
+                    found = 1;
+                    v= listOfProjectsAndVotesFromFile.get(index);
+                    break;
+                }
+            }
+        }
+        return v;
+    }
+    
+//--------------------------------------------------------------------------------------------------------------
+// Check if the project has votes allocated to it and display the point allocation
+//--------------------------------------------------------------------------------------------------------------
     public void showProjectPointAllocation()
     {
         ArrayList<VotesAllocation> votesAllocationList = new ArrayList<VotesAllocation>();
@@ -369,9 +387,25 @@ class Menu
         }
 
     }
-    public void readDataFromFile()
+
+
+//--------------------------------------------------------------------------------------------------------------
+// QUIT option and store project
+//--------------------------------------------------------------------------------------------------------------
+    public void quit()
     {
-        StoreData data = new StoreData(fileName);
-        listOfProjectsAndVotesFromFile = data.readData();
+        storeInformation(listOfProjectsAndVotes);
+        System.exit(0);
+    }
+    //-----------------------------------------------------------
+
+//-------------------------------------------------------------
+//  Store Project in a file
+//------------------------------------------------------------
+    public void storeInformation(ArrayList<VotesAllocation> v)
+    {
+       // System.out.println(v.toString());
+        StoreData data = new StoreData(v,fileName);
+        data.writeData();
     }
 }
