@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProjectPointAllocation 
+public class ProjectPointAllocation
 {
     private ArrayList<VotesAllocation> votesAllocationList;
     private Menu menu= new Menu();
@@ -41,7 +41,7 @@ public class ProjectPointAllocation
 
     }
 
-    public void showProjectPointAllocation() 
+    public void showProjectPointAllocation()
     {
         Scanner scan = new Scanner(System.in);
 
@@ -49,13 +49,13 @@ public class ProjectPointAllocation
         String nameOfProject = scan.next();
         Project p = searchInProject(nameOfProject);
 
-        if (p == null) 
+        if (p == null)
         {
             System.out.println("The project " + nameOfProject + " doesn't exist.Press N to try again, R to return to main menu or Q to quit: ");
             chooseShowProject_TryAgain90();
 
         }
-        if (p != null) 
+        if (p != null)
         {
             System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
             calculatePointsAllocation(p);
@@ -84,21 +84,21 @@ public class ProjectPointAllocation
 
     }
 
-    public void calculatePointsAllocation(Project p) 
+    public void calculatePointsAllocation(Project p)
     {
         Tester test = new Tester();
         this.setListOfMembers(p);
 
-        for (VotesAllocation votesAllocation : votesAllocationList) 
+        for (VotesAllocation votesAllocation : votesAllocationList)
         {
-            if (votesAllocation.getProject().equals(p)) 
+            if (votesAllocation.getProject().equals(p))
             {
                 ArrayList<Vote> list = votesAllocation.getList();
 
-                for(Vote v : list) 
+                for(Vote v : list)
                 {
                     ArrayList<Member> listOfMemberAndVotes = v.getListOfMembersAndVotes();
-                    for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2) 
+                    for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2)
                     {
                         pointAllocationOfMember(listOfMemberAndVotes.get(i),listOfMemberAndVotes.get(i).getVote() / (double)listOfMemberAndVotes.get(i + 1).getVote());
                         pointAllocationOfMember(listOfMemberAndVotes.get(i+1),listOfMemberAndVotes.get(i+1).getVote() / (double)listOfMemberAndVotes.get(i).getVote());
@@ -113,12 +113,12 @@ public class ProjectPointAllocation
     public void pointAllocationOfMember(Member member,double r)
     {
         int i = 0;
-        double ratio = r;
+        double denominator = r;
         for(Member m:listOfMembers){
             if(m.getName().equals(member.getName()))
             {
-                ratio = ratio + m.getRatio();
-                listOfMembers[i].setRatio(ratio);
+                denominator = denominator + m.getRatio();
+                listOfMembers[i].setRatio(denominator);
             }
             i++;
         }
@@ -128,8 +128,8 @@ public class ProjectPointAllocation
         {
             if(m.getName().equals(member.getName()))
             {
-                ratio = m.getRatio();
-                listOfMembers[i].setFinalShare(1/ratio);
+                denominator = m.getRatio();
+                listOfMembers[i].setFinalShare(1/denominator);
             }
             i++;
         }
@@ -141,7 +141,7 @@ public class ProjectPointAllocation
     {
         System.out.println("The point allocation based on votes is: ");
         DecimalFormat twoDForm = new DecimalFormat("#.##");
-        for(int i=0; i<listOfMembers.length; i++) 
+        for(int i=0; i<listOfMembers.length; i++)
         {
             System.out.println(listOfMembers[i].getName()+ " : " + twoDForm.format(listOfMembers[i].getFinalShare()));
         }
