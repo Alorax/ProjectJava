@@ -6,20 +6,26 @@ class Menu
     ArrayList<Project> ProjectList = new ArrayList<Project>();
     ArrayList<VotesAllocation> listOfProjectsAndVotes = new ArrayList<>();
     ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile = new ArrayList<>();
+    ArrayList<VotesAllocation> votesAllocationList;
     private char option;
     private Scanner scan = new Scanner(System.in);
     private static String fileName = "NewProject.txt";
-    
-//--------------------------------------------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------------------------------------------
 // Read Data from file before the menu is displayed
 //--------------------------------------------------------------------------------------------------------------
+
+    public Menu() 
+    {
+        this.readDataFromFile();
+    }
     public void readDataFromFile()
     {
         StoreData data = new StoreData(fileName);
         listOfProjectsAndVotesFromFile = data.readData();
     }
 
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Display menu text
 //--------------------------------------------------------------------------------------------------------------
     public void displayMenu()
@@ -35,7 +41,7 @@ class Menu
         choose();
     }
 //--------------------------------------------------------------------------------------------------------------
-// Allow user to choose their option 
+// Allow user to choose their option
 //--------------------------------------------------------------------------------------------------------------
 
     public int choose()
@@ -55,10 +61,10 @@ class Menu
             case 'q':
                 quit();
             default:
-                {
+            {
                 System.out.println("Please choose another option: ");
                 choose();
-                }
+            }
         }
 
         return 0;
@@ -124,7 +130,7 @@ class Menu
             {
                 System.out.println("\nInvalid input, try again.");
             } else
-                {
+            {
                 if (checkIfProjectExists(projectName))
                     System.out.println("\n This project already exists");
                 else
@@ -136,14 +142,14 @@ class Menu
 
     public boolean checkIfProjectExists(String name)
     {
-            if (searchProject(name) != null)
-            {
-                return true;
-            }
+        if (searchProject(name) != null)
+        {
+            return true;
+        }
 
         return false;
     }
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Get the number of team members and validate it
 //--------------------------------------------------------------------------------------------------------------
     public int getNumberofTeamMembers()
@@ -175,7 +181,7 @@ class Menu
         }
         return numberOfMembers;
     }
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Get names of team members and validate them
 //--------------------------------------------------------------------------------------------------------------
     public boolean checkIfMemberExists(String name, String[] namesOfTeamMembers)
@@ -210,7 +216,7 @@ class Menu
                         valid = true;
                         names[i] = name;
                     } else
-                        {
+                    {
                         System.out.println("\nA name must contain only alphanumeric characters and be between " +
                                 Project.MINNAMELENGTH + " and " + Project.MAXNAMELENGTH +
                                 " characters, try again.");
@@ -241,30 +247,30 @@ class Menu
             chooseProject_TryAgain();
         }
 
-          if(p != null)
-          {
-              System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
-              {   VotesAllocation vFound = searchAllocatedVotesProject(nameOfProject);
-                  if (vFound != null)
-                      if(vFound .getList() != null)
-                      {
-                         System.out.println("This projects has votes allocated already! Press N to try again, R to return to main menu or Q to quit:");
-                         chooseProject_TryAgain();
-                      }
-                  VotesAllocation v = new VotesAllocation(p);
-                  v.getVotes();
-                  listOfProjectsAndVotes.add(v);
+        if(p != null)
+        {
+            System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
+            {   VotesAllocation vFound = searchAllocatedVotesProject(nameOfProject);
+                if (vFound != null)
+                    if(vFound .getList() != null)
+                    {
+                        System.out.println("This projects has votes allocated already! Press N to try again, R to return to main menu or Q to quit:");
+                        chooseProject_TryAgain();
+                    }
+                VotesAllocation v = new VotesAllocation(p);
+                v.getVotes();
+                listOfProjectsAndVotes.add(v);
 
-              }
-         }
+            }
+        }
         System.out.print("\n\tPress any key to return to the Main Menu: ");
         if (scan.next() != null)
         {
             displayMenu();
         }
-}
-    
-//--------------------------------------------------------------------------------------------------------------
+    }
+
+    //--------------------------------------------------------------------------------------------------------------
 // Give user other opotions if the project is not found
 //--------------------------------------------------------------------------------------------------------------
     private int chooseProject_TryAgain()
@@ -286,7 +292,7 @@ class Menu
         return 0;
     }
 
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Search if project is stored in the data file
 //--------------------------------------------------------------------------------------------------------------
     public Project searchProjectInFile(String nameOfProject)
@@ -325,7 +331,7 @@ class Menu
         }
         return p;
     }
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Check if the project has allocated votes
 //--------------------------------------------------------------------------------------------------------------
     public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject)
@@ -363,13 +369,13 @@ class Menu
         }
         return v;
     }
-    
-//--------------------------------------------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------------------------------------------
 // Check if the project has votes allocated to it and display the point allocation
 //--------------------------------------------------------------------------------------------------------------
     public void showProjectPointAllocation()
     {
-        ArrayList<VotesAllocation> votesAllocationList = new ArrayList<VotesAllocation>();
+       // ArrayList<VotesAllocation> votesAllocationList = new ArrayList<VotesAllocation>();
         if(listOfProjectsAndVotesFromFile != null)
             votesAllocationList=listOfProjectsAndVotesFromFile;
         if(listOfProjectsAndVotes != null)
@@ -389,23 +395,23 @@ class Menu
     }
 
 
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // QUIT option and store project
 //--------------------------------------------------------------------------------------------------------------
     public void quit()
     {
-        storeInformation(listOfProjectsAndVotes);
+        if(listOfProjectsAndVotes != null)
+             storeInformation(listOfProjectsAndVotes);
         System.exit(0);
     }
     //-----------------------------------------------------------
 
-//-------------------------------------------------------------
+    //-------------------------------------------------------------
 //  Store Project in a file
 //------------------------------------------------------------
     public void storeInformation(ArrayList<VotesAllocation> v)
     {
-       // System.out.println(v.toString());
+        // System.out.println(v.toString());
         StoreData data = new StoreData(v,fileName);
         data.writeData();
     }
-}

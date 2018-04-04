@@ -7,10 +7,10 @@ import java.util.Scanner;
 public class ProjectPointAllocation
 {
     private ArrayList<VotesAllocation> votesAllocationList;
-    private Menu menu= new Menu();
     private Member[] listOfMembers;
     private Scanner scan = new Scanner(System.in);
     private char option;
+    private Menu menu = new Menu();
 
     public ProjectPointAllocation(ArrayList<VotesAllocation> votesAllocationList)
     {
@@ -26,7 +26,7 @@ public class ProjectPointAllocation
         }
         this.listOfMembers = listOfMembers;
     }
-//--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 // Check if the project exists
 //--------------------------------------------------------------------------------------------------------------
     public Project  searchInProject(String name)
@@ -179,4 +179,3 @@ public class ProjectPointAllocation
 
     }
 
-}
