@@ -97,18 +97,16 @@ class Project implements Serializable
 
     }
 
-
- 
 //--------------------------------------------------------------------------------------------------------------
 // Display error if input is wrong
 //--------------------------------------------------------------------------------------------------------------
+    
     public void fatalError(String errorMessage)
     {
         System.out.println("Fatal error: " + errorMessage);
         // A non-zero status indicates an abnormal termination.
         System.exit(1);
     }
-
 
 //--------------------------------------------------------------------------------------------------------------
 // Different methods to validate user input
@@ -162,10 +160,10 @@ class Project implements Serializable
         return TeamOK;
     }
     
-
 //--------------------------------------------------------------------------------------------------------------
 // Search the project in the File
 //--------------------------------------------------------------------------------------------------------------
+    
     public Project searchProjectInFile( String nameOfProject,ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile)
     {
         int found = 0;
@@ -206,6 +204,3 @@ class Project implements Serializable
     }
 
 }
-
-
-
