@@ -14,13 +14,13 @@ public class ProjectPointAllocation
 
     public ProjectPointAllocation(ArrayList<VotesAllocation> votesAllocationList)
     {
-        this.votesAllocationList= votesAllocationList;
+        this.votesAllocationList = votesAllocationList;
     }
 
     public void setListOfMembers(Project p)
     {
         Member[] listOfMembers = new Member[p.getNumberOfTeamMembers()];
-        for(int i = 0; i< listOfMembers.length;i++)
+        for(int i = 0; i < listOfMembers.length; i++)
         {
             listOfMembers[i] = new Member(p.getNamesOfTeamMembers()[i],0);
         }
@@ -34,8 +34,8 @@ public class ProjectPointAllocation
     public Project  searchInProject(String name)
     {
         Project p = null;
-        for(VotesAllocation votesAllocation:votesAllocationList)
-            if(votesAllocation.getProject().getName().equals(name))
+        for (VotesAllocation votesAllocation:votesAllocationList)
+            if (votesAllocation.getProject().getName().equals(name))
             {
                 p = votesAllocation.getProject();
                 break;
@@ -59,9 +59,8 @@ public class ProjectPointAllocation
 
         if (p == null) // if project doesn't exist
         {
-            System.out.println("The project " + nameOfProject + " doesn't exist.Press N to try again, R to return to main menu or Q to quit: ");
+            System.out.println("The project " + nameOfProject + " doesn't exist. Press N to try again, R to return to main menu or Q to quit: ");
             chooseShowProject_TryAgain90();
-
         }
         if (p != null) // if project exists
         {
@@ -74,8 +73,8 @@ public class ProjectPointAllocation
             }
             else
             {
-                System.out.println("There are " + p.getNumberOfTeamMembers() + " members in the team called " + "\"" + p.getName()+"\"" + ". Right now our formula only supports teams of 3 members.");
-                System.out.println("We are sorry for this. Press N to try again with a different team, R to return to main menu or Q to quit: ");
+                System.out.println("There are " + p.getNumberOfTeamMembers() + " members in the team called " + "\"" + p.getName() + "\"" + ". Right now our formula only supports teams of 3 members.");
+                System.out.println("We are sorry for this. Press N to try again with a different team, R to return to Main Menu or Q to quit: ");
                 chooseShowProject_TryAgain90();
             }
         }
@@ -84,18 +83,21 @@ public class ProjectPointAllocation
 //--------------------------------------------------------------------------------------------------------------
 // Give user more options if the project is not found or doesn't have any allocated votes
 //--------------------------------------------------------------------------------------------------------------
+    
     private int chooseShowProject_TryAgain90()
     {
         char userInput = scan.next().charAt(0);
         option = Character.toLowerCase(userInput); //enables the user to input either lowercase or uppercase characters.
-        switch (option) {
+        switch (option) 
+        {
             case 'n':
                 showProjectPointAllocation();
             case 'r':
                 menu.displayMenu();
             case 'q':
                 menu.quit();
-            default: {
+            default: 
+                {
                 System.out.println("Please choose another option: ");
                 menu.choose();
             }
@@ -118,10 +120,10 @@ public class ProjectPointAllocation
             {
                 ArrayList<Vote> list = votesAllocation.getList();
 
-                for(Vote v : list)
+                for (Vote v : list)
                 {
                     ArrayList<Member> listOfMemberAndVotes = v.getListOfMembersAndVotes();
-                    for(int i=0; i< listOfMemberAndVotes.size()-1;i=i+2)
+                    for(int i=0; i < listOfMemberAndVotes.size()-1; i=i+2)
                     {//calculate ratio for each member when another member gives a vote
                         pointAllocationOfMember(listOfMemberAndVotes.get(i),listOfMemberAndVotes.get(i).getVote() / (double)listOfMemberAndVotes.get(i + 1).getVote());
 
@@ -138,12 +140,12 @@ public class ProjectPointAllocation
 // Calculate final share for each member
 //--------------------------------------------------------------------------------------------------------------
 
-    public void pointAllocationOfMember(Member member,double r)
+    public void pointAllocationOfMember(Member member, double r)
     {
         int i = 0;
         double denominator = r;
-        for(Member m:listOfMembers){
-            if(m.getName().equals(member.getName())) // calculate denominator
+        for (Member m:listOfMembers){
+            if (m.getName().equals(member.getName())) // calculates denominator
             {
                 denominator = denominator + m.getRatio();
                 listOfMembers[i].setRatio(denominator);
@@ -151,10 +153,10 @@ public class ProjectPointAllocation
             i++;
         }
 
-        i=0;
-        for(Member m:listOfMembers)
+        i = 0;
+        for (Member m:listOfMembers)
         {
-            if(m.getName().equals(member.getName())) // calculate the actual ratio
+            if (m.getName().equals(member.getName())) // calculates the actual ratio
             {
                 denominator = m.getRatio();
                 listOfMembers[i].setFinalShare(1/denominator);
@@ -173,7 +175,7 @@ public class ProjectPointAllocation
     {
         System.out.println("The point allocation based on votes is: ");
         DecimalFormat twoDForm = new DecimalFormat("#.##");
-        for(int i=0; i<listOfMembers.length; i++)
+        for (int i=0; i<listOfMembers.length; i++)
         {
             System.out.println(listOfMembers[i].getName()+ " : " + twoDForm.format(listOfMembers[i].getFinalShare()));
         }
