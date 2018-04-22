@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 class Menu
 {
-    ArrayList<Project> ProjectList = new ArrayList<Project>();
-    ArrayList<VotesAllocation> listOfProjectsAndVotes = new ArrayList<>();
-    ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile = new ArrayList<>();
-    ArrayList<VotesAllocation> votesAllocationList;
+    static ArrayList<Project> ProjectList = new ArrayList<Project>();
+    static ArrayList<VotesAllocation> listOfProjectsAndVotes = new ArrayList<>();
+    static ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile = new ArrayList<>();
+    static ArrayList<VotesAllocation> votesAllocationList;
     private char option;
     private Scanner scan = new Scanner(System.in);
     private static String fileName = "NewProject.txt";
@@ -144,7 +144,7 @@ class Menu
         return projectName;
     }
 
-    public boolean checkIfProjectExists(String name)
+    public static boolean checkIfProjectExists(String name)
     {
         if (searchProject(name) != null)
         {
@@ -191,8 +191,7 @@ class Menu
 //--------------------------------------------------------------------------------------------------------------
 // Get names of team members and validate them
 //--------------------------------------------------------------------------------------------------------------
-    
-    public boolean checkIfMemberExists(String name, String[] namesOfTeamMembers)
+    public static boolean checkIfMemberExists(String name, String[] namesOfTeamMembers)
     {
         if (namesOfTeamMembers != null)
         {
@@ -322,7 +321,7 @@ class Menu
         return p;
     }
 
-    public Project searchProject(String nameOfProject)
+    public static Project searchProject(String nameOfProject)
     {
         int found = 0;
         Project p = null;
