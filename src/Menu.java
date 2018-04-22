@@ -97,7 +97,8 @@ class Menu
         Project p = createProject();
         ProjectList.add(p);
         System.out.print("\n\tPress any key to return to the Main Menu: ");
-        if (scan.next() != null) {
+        if (scan.next() != null) 
+        {
             displayMenu();
         }
     }
@@ -133,7 +134,8 @@ class Menu
             if (!Project.checkName(projectName))
             {
                 System.out.println("\nInvalid input, try again.");
-            } else
+            } 
+            else
             {
                 if (checkIfProjectExists(projectName))
                     System.out.println("\n This project already exists");
@@ -177,13 +179,18 @@ class Menu
                 if (Project.checkNumberOfMembers(numberOfMembers))
                 {
                     valid = true;
-                } else {
+                } 
+                else 
+                {
                     System.out.println("\nProjects can have between " +
                             Project.MINMEMBERS + " and " +
                             Project.MAXMEMBERS + " members, try again.");
                 }
-            } else
+            } 
+            else
+            {
                 System.out.println("Not a number. Try again!");
+            }
         }
         return numberOfMembers;
     }
@@ -223,14 +230,18 @@ class Menu
                     {
                         valid = true;
                         names[i] = name;
-                    } else
+                    } 
+                    else
                     {
                         System.out.println("\nA name must contain only alphanumeric characters and be between " +
                                 Project.MINNAMELENGTH + " and " + Project.MAXNAMELENGTH +
                                 " characters, try again.");
                     }
-                } else
+                } 
+                else
+                {
                     System.out.println("\n This member already exists! Try again!");
+                }
 
             }
         }
@@ -250,18 +261,18 @@ class Menu
 
         p = searchProject(nameOfProject);
 
-        if(p==null)
+        if (p==null)
         {
             System.out.println("\nThe project with name " + nameOfProject + " was not found. Press N to try again, R to return to main menu or Q to quit:");
             chooseProject_TryAgain();
         }
 
-        if(p != null)
+        if (p != null)
         {
             System.out.println("There are " + p.getNumberOfTeamMembers() + " members.");
             {   VotesAllocation vFound = searchAllocatedVotesProject(nameOfProject);
                 if (vFound != null)
-                    if(vFound .getList() != null)
+                    if (vFound .getList() != null)
                     {
                         System.out.println("This projects has votes allocated already! Press N to try again, R to return to main menu or Q to quit:");
                         chooseProject_TryAgain();
@@ -369,13 +380,14 @@ class Menu
         int found = 0;
         VotesAllocation v = null;
         v = searchAllocatedVotesProjectInFile(nameOfProject);
-        if(v == null) {
+        if (v == null) 
+        {
             for (int index = 0; index < listOfProjectsAndVotesFromFile.size(); index++)
             {
                 if (listOfProjectsAndVotesFromFile.get(index).getProject().getName().equals(nameOfProject))
                 {
                     found = 1;
-                    v= listOfProjectsAndVotesFromFile.get(index);
+                    v = listOfProjectsAndVotesFromFile.get(index);
                     break;
                 }
             }
@@ -390,13 +402,14 @@ class Menu
     public void showProjectPointAllocation()
     {
        // ArrayList<VotesAllocation> votesAllocationList = new ArrayList<VotesAllocation>();
-        if(listOfProjectsAndVotesFromFile != null)
+        if (listOfProjectsAndVotesFromFile != null)
             votesAllocationList=listOfProjectsAndVotesFromFile;
-        if(listOfProjectsAndVotes != null)
+        if (listOfProjectsAndVotes != null)
             votesAllocationList.addAll(listOfProjectsAndVotes);
-        if(votesAllocationList == null)
+        if (votesAllocationList == null)
             System.out.println("There are 0 projects.");
-        else {
+        else 
+        {
             ProjectPointAllocation projectPointAllocation = new ProjectPointAllocation(votesAllocationList);
             projectPointAllocation.showProjectPointAllocation();
         }
@@ -414,7 +427,7 @@ class Menu
     
     public void quit()
     {
-        if(listOfProjectsAndVotes != null)
+        if (listOfProjectsAndVotes != null)
              storeInformation(listOfProjectsAndVotes);
         System.exit(0);
     }
