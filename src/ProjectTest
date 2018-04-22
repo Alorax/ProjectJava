@@ -49,5 +49,4 @@ public class ProjectTest {
         theTeam[2] = "Anima";
         theTeam[3] = "Josh";
         assertEquals("Team is valid", true, Project.checkTheTeam(theTeam, 4));
-
     }
