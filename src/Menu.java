@@ -442,3 +442,4 @@ class Menu
         StoreData data = new StoreData(v,fileName);
         data.writeData();
     }
+}
