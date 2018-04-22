@@ -12,7 +12,7 @@ class Menu
     private static String fileName = "NewProject.txt";
 
 //--------------------------------------------------------------------------------------------------------------
-// Read Data from file before the menu is displayed
+// Reads Data from file before the menu is displayed
 //--------------------------------------------------------------------------------------------------------------
 
     public Menu() 
@@ -26,7 +26,7 @@ class Menu
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Display menu text
+// Displays menu text
 //--------------------------------------------------------------------------------------------------------------
     
     public void displayMenu()
@@ -43,7 +43,7 @@ class Menu
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Allow user to choose their option
+// Allows user to choose their option from the Main Menu
 //--------------------------------------------------------------------------------------------------------------
 
     public int choose()
@@ -115,7 +115,7 @@ class Menu
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Get name of project and check if the name already exists
+// Gets name of project and checks if the name already exists
 //--------------------------------------------------------------------------------------------------------------
 
     public String getName()
@@ -155,7 +155,7 @@ class Menu
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Get the number of team members and validate it
+// Gets the number of team members and validates it
 //--------------------------------------------------------------------------------------------------------------
     
     public int getNumberofTeamMembers()
@@ -189,8 +189,9 @@ class Menu
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Get names of team members and validate them
+// Gets names of team members and validates them
 //--------------------------------------------------------------------------------------------------------------
+    
     public static boolean checkIfMemberExists(String name, String[] namesOfTeamMembers)
     {
         if (namesOfTeamMembers != null)
@@ -237,7 +238,7 @@ class Menu
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Allow user to enter votes
+// Allows user to enter votes
 //--------------------------------------------------------------------------------------------------------------
 
     public void enterVotes()
@@ -279,7 +280,7 @@ class Menu
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Give user other opotions if the project is not found
+// Gives user other opotions if the project is not found
 //--------------------------------------------------------------------------------------------------------------
     
     private int chooseProject_TryAgain()
@@ -301,9 +302,10 @@ class Menu
         return 0;
     }
 
-    //--------------------------------------------------------------------------------------------------------------
-// Search if project is stored in the data file
 //--------------------------------------------------------------------------------------------------------------
+// Searches if the project is stored in the data file
+//--------------------------------------------------------------------------------------------------------------
+    
     public Project searchProjectInFile(String nameOfProject)
     {
         int found = 0;
@@ -342,7 +344,7 @@ class Menu
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Check if the project has allocated votes
+// Checks if the project has allocated votes
 //--------------------------------------------------------------------------------------------------------------
     
     public VotesAllocation searchAllocatedVotesProjectInFile(String nameOfProject)
@@ -382,7 +384,7 @@ class Menu
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Check if the project has votes allocated to it and display the point allocation
+// Checks if the project has votes allocated to it and displays the point allocation
 //--------------------------------------------------------------------------------------------------------------
     
     public void showProjectPointAllocation()
@@ -407,7 +409,7 @@ class Menu
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// QUIT option and store project
+// QUIT option and stores the project
 //--------------------------------------------------------------------------------------------------------------
     
     public void quit()
@@ -418,7 +420,7 @@ class Menu
     }
 
 //-------------------------------------------------------------
-//  Store Project in a file
+//  Stores Project in a file
 //------------------------------------------------------------
     
     public void storeInformation(ArrayList<VotesAllocation> v)
