@@ -98,7 +98,7 @@ class Project implements Serializable
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Display error if input is wrong
+// Displays error if input is wrong
 //--------------------------------------------------------------------------------------------------------------
     
     public void fatalError(String errorMessage)
@@ -132,7 +132,7 @@ class Project implements Serializable
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// validate number of members
+// Validates number of members
 //--------------------------------------------------------------------------------------------------------------
 
     static boolean checkNumberOfMembers(int theNumberOfMembers)
@@ -161,7 +161,7 @@ class Project implements Serializable
     }
     
 //--------------------------------------------------------------------------------------------------------------
-// Search the project in the File
+// Searches for the project in the File
 //--------------------------------------------------------------------------------------------------------------
     
     public Project searchProjectInFile( String nameOfProject,ArrayList<VotesAllocation> listOfProjectsAndVotesFromFile)
