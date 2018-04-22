@@ -5,10 +5,13 @@ public class Tester {
 
     public static boolean isNumber(String s){
         boolean valid = false;
-        try{
-            Integer.parseInt(s); // s is a valid integer
+        try
+        {
+            Integer.parseInt(s); //s is a valid integer
             valid = true;
-        }catch (Exception ex){
+        }
+        catch (Exception ex)
+        {
             //not an integer
         }
 
