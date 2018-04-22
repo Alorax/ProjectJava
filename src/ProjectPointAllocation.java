@@ -166,7 +166,7 @@ public class ProjectPointAllocation
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Show pint allocation based on votes
+// Show point allocation based on votes
 //--------------------------------------------------------------------------------------------------------------
 
     public void showVotes()
