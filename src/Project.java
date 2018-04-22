@@ -20,7 +20,7 @@ class Project implements Serializable
 
     public Project (String aName, int aNumberOfTeamMembers, String[] theNamesOfTeamMembers)
     {
-        if(checkName(aName))
+        if (checkName(aName))
         {
             name = aName;//
         }
@@ -28,7 +28,7 @@ class Project implements Serializable
         {
             fatalError(" Invalid Input");
         }
-        if(checkNumberOfMembers(aNumberOfTeamMembers))
+        if (checkNumberOfMembers(aNumberOfTeamMembers))
         {
             numberOfTeamMembers = aNumberOfTeamMembers;
         }
@@ -36,7 +36,7 @@ class Project implements Serializable
         {
             fatalError(" Invalid Input");
         }
-        if(checkTheTeam(theNamesOfTeamMembers, numberOfTeamMembers))
+        if (checkTheTeam(theNamesOfTeamMembers, numberOfTeamMembers))
         {
             namesOfTeamMembers = theNamesOfTeamMembers;
         }
@@ -79,11 +79,11 @@ class Project implements Serializable
 
     public String printNamesOfTeamMembers(String[] namesOfTeamMembers)
     {
-        String names=null;
+        String names = null;
         if(namesOfTeamMembers !=  null)
             names = namesOfTeamMembers[0];
 
-        for (int index = 1 ; index < namesOfTeamMembers.length; index ++ )
+        for (int index = 1 ; index < namesOfTeamMembers.length; index++ )
         {
             if(namesOfTeamMembers[index] != null)
               names = names + " , " + namesOfTeamMembers[index];
@@ -93,7 +93,7 @@ class Project implements Serializable
     @Override
     public String toString()
     {
-        return  name + " , " + numberOfTeamMembers +" , " + printNamesOfTeamMembers(namesOfTeamMembers);
+        return  name + " , " + numberOfTeamMembers + " , " + printNamesOfTeamMembers(namesOfTeamMembers);
 
     }
 
@@ -115,7 +115,6 @@ class Project implements Serializable
     public static boolean checkName(String theName)
     {
         boolean nameOK = true;
-
 
         if (theName.isEmpty())
         {
@@ -169,9 +168,9 @@ class Project implements Serializable
         int found = 0;
         Project p = null;
 
-        for(VotesAllocation votesAllocation:listOfProjectsAndVotesFromFile)
+        for (VotesAllocation votesAllocation:listOfProjectsAndVotesFromFile)
         {
-            if(votesAllocation.getProject().getName().equals(nameOfProject))
+            if (votesAllocation.getProject().getName().equals(nameOfProject))
             {
                 found = 1;
                 p=votesAllocation.getProject();
@@ -186,9 +185,9 @@ class Project implements Serializable
                                  ArrayList<Project> ProjectList)
     {
         int found = 0;
-        Project p= null;
+        Project p = null;
         p = searchProjectInFile(nameOfProject,listOfProjectsAndVotesFromFile);
-        if(p == null)
+        if (p == null)
         {
             for (int index = 0; index < ProjectList.size(); index++)
             {
