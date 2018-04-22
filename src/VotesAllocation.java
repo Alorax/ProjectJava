@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class VotesAllocation
 {
-
       private Project project;
-      private ArrayList<Vote> list  ;
+      private ArrayList<Vote> list;
       private Vote v;
 
 
@@ -18,7 +17,7 @@ public class VotesAllocation
 
     public VotesAllocation(Project p, ArrayList<Vote> list)
     {
-        this.project=p;
+        this.project = p;
         this.list  = list;
     }
 
@@ -55,8 +54,8 @@ public class VotesAllocation
     {
         list = new ArrayList<>();
         int numberOfMembers = project.getNumberOfTeamMembers();
-        for (int i = 0 ; i < numberOfMembers;i ++)
-            if( project.getNamesOfTeamMembers()[i] != null )
+        for (int i = 0 ; i < numberOfMembers; i++)
+            if (project.getNamesOfTeamMembers()[i] != null)
             {
                 ArrayList<Member> listOfMembersVotes = null;
                 System.out.print("\nEnter " + project.getNamesOfTeamMembers()[i] +"’s votes, points must add up to 100:\n");
@@ -69,10 +68,11 @@ public class VotesAllocation
 //--------------------------------------------------------------------------------------------------------------
 // Add votes in a list to be stored and check if sum of votes is equal to 100
 //-------------------------------------------------------------------------------------------------------------- 
-    public ArrayList<Member>  giveVotes(int i,int numberOfMembers)
+    public ArrayList<Member>  giveVotes(int i, int numberOfMembers)
     {
         ArrayList<Member> listOfMembersVotes = new ArrayList<>();
-        for (int j = 0; j < numberOfMembers; j++ ) {
+        for (int j = 0; j < numberOfMembers; j++) 
+        {
             if (project.getNamesOfTeamMembers()[j] != null)
             {
                 if (i != j)
@@ -97,7 +97,7 @@ public class VotesAllocation
 //-------------------------------------------------------------------------------------------------------------- 
     public int readAndCheckVote(int i,int j)
     {
-        int vote = 0 ;
+        int vote = 0;
         Scanner s = new Scanner(System.in);
 
         System.out.print("\n\tEnter " + project.getNamesOfTeamMembers()[i] + "’s points for " + this.project.getNamesOfTeamMembers()[j] + " : ");
@@ -105,7 +105,7 @@ public class VotesAllocation
         if(Tester.isNumber(userInput))
             vote = Integer.parseInt(userInput);
 
-        if(vote == 0)
+        if (vote == 0)
         {
             System.out.println("\n Input is not valid. Try again!");
             readAndCheckVote(i,j);
@@ -116,7 +116,8 @@ public class VotesAllocation
     public int getSumOfVotes(ArrayList<Member> list)
     {
         int sum = 0;
-        for(Member m: list){
+        for (Member m: list)
+        {
             sum = sum + m.getVote();
         }
      return sum;
