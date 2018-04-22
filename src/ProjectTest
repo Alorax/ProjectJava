@@ -18,12 +18,6 @@ public class ProjectTest {
     }
 
     @Test
-    public void checkIfProjectExistsTest() {
-        assertEquals("Project doesn't exist", false, Menu.checkIfProjectExists("abb"));
-        assertEquals("Project exists", true, Menu.checkIfProjectExists("p1"));
-    }
-
-    @Test
     public void checkIfMemberExistsTest() {
         String[] namesOfTeamMembers = {"Benn", "Miruna", "George"};
         assertEquals("Member doesn't exist", false, Menu.checkIfMemberExists("Ben", namesOfTeamMembers));
