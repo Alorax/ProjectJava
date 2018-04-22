@@ -1,6 +1,10 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//--------------------------------------------------------------------------------------------------------------
+// Checks if numbers entered by user are integers
+//--------------------------------------------------------------------------------------------------------------
+
 public class Tester {
 
     public static boolean isNumber(String s){
