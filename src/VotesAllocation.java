@@ -44,7 +44,7 @@ public class VotesAllocation
     @Override
     public String toString()
     {
-        return project.toString() + " , " +printListOfMembersVotes();
+        return project.toString() + " , " + printListOfMembersVotes();
     } 
 
 //--------------------------------------------------------------------------------------------------------------
