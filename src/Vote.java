@@ -3,11 +3,11 @@ import java.util.ArrayList;
 public class Vote
 {
     private String member;
-    private ArrayList<Member> listOfMembersAndVotes ;
+    private ArrayList<Member> listOfMembersAndVotes;
 
     public Vote(String member,ArrayList<Member> listOfMembersAndVotes)
     {
-        this.member =member;
+        this.member = member;
         this.listOfMembersAndVotes = listOfMembersAndVotes;
     }
 
@@ -35,7 +35,7 @@ public class Vote
     {
         String list = null;
 
-        if(listOfMembersAndVotes != null)
+        if (listOfMembersAndVotes != null)
            list = listOfMembersAndVotes.get(0).toString();
 
         for (int index = 1; index < listOfMembersAndVotes.size(); index ++)
