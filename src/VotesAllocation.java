@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class VotesAllocation
 {
-      private Project project;
-      private ArrayList<Vote> list;
-      private Vote v;
+    private Project project;
+    private ArrayList<Vote> list;
+    private Vote v;
 
 
     static StoreData store;
