@@ -18,7 +18,7 @@ public class VotesAllocation
     public VotesAllocation(Project p, ArrayList<Vote> list)
     {
         this.project = p;
-        this.list  = list;
+        this.list = list;
     }
 
     public ArrayList<Vote> getList()
@@ -54,16 +54,16 @@ public class VotesAllocation
     {
         list = new ArrayList<>();
         int numberOfMembers = project.getNumberOfTeamMembers();
-        for (int i = 0 ; i < numberOfMembers; i++)
-            if (project.getNamesOfTeamMembers()[i] != null)
-            {
-                ArrayList<Member> listOfMembersVotes = null;
-                System.out.print("\nEnter " + project.getNamesOfTeamMembers()[i] +"’s votes, points must add up to 100:\n");
-                listOfMembersVotes = giveVotes(i,numberOfMembers);
+        for (int i = 0; i < numberOfMembers; i++)
+        if (project.getNamesOfTeamMembers()[i] != null)
+        {       
+            ArrayList<Member> listOfMembersVotes = null;
+            stem.out.print("\nEnter " + project.getNamesOfTeamMembers()[i] +"’s votes, points must add up to 100:\n");
+            listOfMembersVotes = giveVotes(i,numberOfMembers);
             Vote v = new Vote (project.getNamesOfTeamMembers()[i],listOfMembersVotes);
             list.add(v);
         }
- }
+   }
 
 //--------------------------------------------------------------------------------------------------------------
 // Add votes in a list to be stored and check if sum of votes is equal to 100
@@ -103,7 +103,9 @@ public class VotesAllocation
         System.out.print("\n\tEnter " + project.getNamesOfTeamMembers()[i] + "’s points for " + this.project.getNamesOfTeamMembers()[j] + " : ");
         String userInput = s.next();
         if(Tester.isNumber(userInput))
-            vote = Integer.parseInt(userInput);
+        {
+              vote = Integer.parseInt(userInput);
+        }
 
         if (vote == 0)
         {
@@ -113,6 +115,9 @@ public class VotesAllocation
 
         return vote;
     }
+//--------------------------------------------------------------------------------------------------------------
+// Calculates sum of votes given by each member
+//-------------------------------------------------------------------------------------------------------------- 
     public int getSumOfVotes(ArrayList<Member> list)
     {
         int sum = 0;
@@ -120,13 +125,12 @@ public class VotesAllocation
         {
             sum = sum + m.getVote();
         }
-     return sum;
+        return sum;
     }
 
-    public String printListOfMembersVotes ()
+    public String printListOfMembersVotes()
     {
         String listOfMembersVotes = null;
-
         if (list != null)
             listOfMembersVotes = list.get(0).toString();
         for (int index = 1; index < list.size(); index++)
@@ -135,5 +139,4 @@ public class VotesAllocation
         }
         return listOfMembersVotes;
     }
-
 }
