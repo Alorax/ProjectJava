@@ -25,8 +25,6 @@ public class StoreData
     {
         try 
         {
-            //writer = new FileWriter(new OutputStreamWriter)
-            //new FileOutputStream(fileName), "utf-8"),true);
             writer = new FileWriter(fileName,true);
             for (int index = 0 ; index < v.size(); index++)
             {
