@@ -317,7 +317,7 @@ class Menu
 // Searches if the project is stored in the data file
 //--------------------------------------------------------------------------------------------------------------
     
-    public Project searchProjectInFile(String nameOfProject)
+    public static Project searchProjectInFile(String nameOfProject)
     {
         int found = 0;
         Project p = null;
