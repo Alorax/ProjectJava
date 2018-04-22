@@ -19,31 +19,34 @@ public class StoreData
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Write data to file
+// Writes data to the file
 //--------------------------------------------------------------------------------------------------------------
     public static void writeData() 
     {
         try 
         {
-            //writer = new FileWriter(new OutputStreamWriter(
+            //writer = new FileWriter(new OutputStreamWriter)
             //new FileOutputStream(fileName), "utf-8"),true);
             writer = new FileWriter(fileName,true);
-            for(int index = 0 ; index < v.size();index ++)
+            for (int index = 0 ; index < v.size(); index++)
             {
                 writer.write(v.get(index).toString());
                 writer.write(System.getProperty( "line.separator" ));
             }
-        } catch (IOException ex) 
+        } 
+        catch (IOException ex) 
         {
             System.out.println("error: " + ex);
-        } finally 
+        } 
+        finally 
         {
             try 
             {
                 writer.close();
-            } catch (Exception ex) 
+            } 
+            catch (Exception ex) 
             {
-                System.out.println("error : " + ex);
+                System.out.println("error: " + ex);
             }
         }
 
@@ -51,7 +54,7 @@ public class StoreData
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Edit data already stored in the file
+// Edits data already stored in the file
 //--------------------------------------------------------------------------------------------------------------
     public static void editData( String name, String replaceLine) 
     {
@@ -64,7 +67,8 @@ public class StoreData
             {
                 String[] s = line.split(" , ");
                 String nameOfProject = s[0];
-                if(s[0].equals(name)) {
+                if (s[0].equals(name)) 
+                {
                     line = "";
                     writer.write(replaceLine); 
                 }
@@ -84,14 +88,15 @@ public class StoreData
             fileOut.write(inputStr.getBytes());
             fileOut.close();
 
-        } catch (Exception e) 
+        } 
+        catch (Exception e) 
         {
             System.out.println("Problem reading file.");
         }
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Read vote allocation for each member
+// Reads vote allocation for each member
 //--------------------------------------------------------------------------------------------------------------
 
     public ArrayList<VotesAllocation> readData() 
