@@ -58,7 +58,7 @@ public class VotesAllocation
         if (project.getNamesOfTeamMembers()[i] != null)
         {       
             ArrayList<Member> listOfMembersVotes = null;
-            stem.out.print("\nEnter " + project.getNamesOfTeamMembers()[i] +"’s votes, points must add up to 100:\n");
+            System.out.print("\nEnter " + project.getNamesOfTeamMembers()[i] +"’s votes, points must add up to 100:\n");
             listOfMembersVotes = giveVotes(i,numberOfMembers);
             Vote v = new Vote (project.getNamesOfTeamMembers()[i],listOfMembersVotes);
             list.add(v);
