@@ -4,6 +4,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//--------------------------------------------------------------------------------------------------------------
+// Contains several methods used to calculate final share of points for each member
+//--------------------------------------------------------------------------------------------------------------
+
 public class ProjectPointAllocation
 {
     private ArrayList<VotesAllocation> votesAllocationList;
